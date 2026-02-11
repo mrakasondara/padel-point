@@ -2,6 +2,7 @@ import { HeaderLanding } from "@/components/layout/HeaderLanding";
 import { Hero } from "@/components/landing-page/Hero";
 import { Higlight } from "@/components/landing-page/Highlight";
 import { Explore } from "@/components/landing-page/Explore";
+import { Reviews } from "@/components/landing-page/Reviews";
 
 export default function LandingPage() {
   return (
@@ -10,6 +11,7 @@ export default function LandingPage() {
       <Hero />
       <Higlight />
       <Explore />
+      <Reviews />
     </div>
   );
 }
