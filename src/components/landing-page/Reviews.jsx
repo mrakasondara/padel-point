@@ -3,7 +3,10 @@ import { Button } from "../ui/button";
 
 export const Reviews = () => {
   return (
-    <div className="flex flex-col lg:flex-row mt-[7rem] lg:px-[3rem] lg:justify-between lg:items-center">
+    <div
+      className="flex flex-col lg:flex-row mt-[7rem] lg:px-[3rem] lg:justify-between lg:items-center"
+      id="reviews"
+    >
       <div className="flex flex-col text-center gap-3">
         <h3 className="text-4xl font-itim">
           From Our <span className="text-main-theme block">Community.</span>

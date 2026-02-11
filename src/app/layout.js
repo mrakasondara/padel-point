@@ -1,5 +1,7 @@
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import { HeaderLanding } from "@/components/layout/HeaderLanding";
+import { Footer } from "@/components/layout/Footer";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -14,7 +16,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${poppins.className}`}>{children}</body>
+      <body className={`${poppins.className}`}>
+        <HeaderLanding/>
+        {children}
+        <Footer/>
+      </body>
     </html>
   );
 }

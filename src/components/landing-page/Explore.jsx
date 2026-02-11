@@ -34,7 +34,7 @@ export const Explore = () => {
     },
   ];
   return (
-    <div className="flex flex-col gap-3 mt-16">
+    <div className="flex flex-col gap-3 mt-16" id="explore">
       <h3 className="text-2xl text-main-theme font-itim">Explore City</h3>
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 gap-y-5 px-3 lg:px-[3rem]">
         {exploreItems.map((explore) => {

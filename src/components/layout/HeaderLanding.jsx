@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Icon } from "./Icon";
 export const HeaderLanding = () => {
   return (
-    <header className="flex mt-5 items-center">
+    <header className="flex mt-5 items-center mx-5">
       <Icon />
       <Button
         variant="outline"
