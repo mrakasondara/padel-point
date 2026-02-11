@@ -4,7 +4,7 @@ export const ExploreItem = ({ city_name, total_court, image }) => {
       <img
         src={image}
         alt={`img-${city_name}`}
-        className="w-[110px] md:w-[120px] rounded-sm object-fit"
+        className="w-[70px] md:w-[120px] rounded-sm object-fit"
       />
       <div className="flex flex-col justify-center">
         <h5 className="text-main-theme font-itim md:text-lg">{city_name}</h5>
