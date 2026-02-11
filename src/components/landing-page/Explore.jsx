@@ -26,11 +26,17 @@ export const Explore = () => {
       total_court: 9,
       image: "images/bali.jpg",
     },
+    {
+      id: 5,
+      city_name: "Maluku",
+      total_court: 1,
+      image: "images/bali.jpg",
+    },
   ];
   return (
-    <div className="flex flex-col gap-3 mt-16 mb-5">
+    <div className="flex flex-col gap-3 mt-16">
       <h3 className="text-2xl text-main-theme font-itim">Explore City</h3>
-      <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 gap-y-5 px-3">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 gap-y-5 px-3 lg:px-[3rem]">
         {exploreItems.map((explore) => {
           return <ExploreItem {...explore} key={explore.id} />;
         })}
