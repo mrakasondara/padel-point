@@ -5,7 +5,7 @@ import { Icon } from "./Icon";
 
 export const Footer = () => {
   return (
-    <footer className="flex text-white flex-col bg-main-theme py-10 px-6 md:px-15 mt-[8rem]">
+    <footer className="flex text-white flex-col bg-main-theme dark:bg-bg py-10 px-6 md:px-15 mt-[8rem]">
       <div className="flex justify-between">
         <div className="flex flex-col">
           <p className="font-semibold text-lg md:text-xl font-itim">
@@ -31,7 +31,7 @@ export const Footer = () => {
         </div>
       </div>
 
-      <div className="flex mt-12 -mb-6 text-secondary-theme justify-between items-center text-[13px]">
+      <div className="flex mt-12 -mb-6 text-constant justify-between items-center text-[13px]">
         <Icon color="secondary" />
         <p>&copy; {new Date().getFullYear()} - PadelPoint</p>
       </div>

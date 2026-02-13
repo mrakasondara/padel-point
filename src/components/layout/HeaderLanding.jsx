@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Icon } from "./Icon";
 import { ToggleTheme } from "./ToggleTheme";
@@ -9,7 +10,7 @@ export const HeaderLanding = () => {
         <ToggleTheme />
         <Button
           variant="outline"
-          className="bg-main-theme hover:bg-secondary-theme hover:text-main-theme cursor-pointer transition text-secondary-theme font-poppins text-[12px]"
+          className="bg-main-theme hover:bg-secondary-theme hover:text-main-theme cursor-pointer transition text-constant font-poppins text-[12px]"
           size="sm"
         >
           Sign In

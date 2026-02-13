@@ -10,7 +10,7 @@ export const Higlight = () => {
           alt="we-padl"
           className="absolute object-cover top-0 z-5 rounded-lg w-full h-full"
         />
-        <div className="flex flex-col p-3 z-5 text-secondary-theme bg-black/10 backdrop-blur-[2px]">
+        <div className="flex flex-col p-3 z-5 text-constant bg-black/10 backdrop-blur-[2px]">
           <h4 className="text-[19px] font-itim">WePadl</h4>
           <h4 className="text-[13px] z-5 font-poppins">350k/hr</h4>
         </div>
@@ -22,7 +22,7 @@ export const Higlight = () => {
             alt="we-padl"
             className="absolute object-cover top-0 z-5 rounded-lg h-full w-125"
           />
-          <div className="flex flex-col p-3 z-5 text-secondary-theme rounded-b-lg bg-black/10 backdrop-blur-[2px]">
+          <div className="flex flex-col p-3 z-5 text-constant rounded-b-lg bg-black/10 backdrop-blur-[2px]">
             <h4 className="text-[19px] font-itim">WePadl</h4>
             <h4 className="text-[13px] z-5 font-poppins">350k/hr</h4>
           </div>
@@ -33,7 +33,7 @@ export const Higlight = () => {
             alt="we-padl"
             className="absolute object-cover top-0 z-5 rounded-lg h-full w-125"
           />
-          <div className="flex flex-col p-3 z-5 text-secondary-theme rounded-b-lg bg-black/10 backdrop-blur-[2px]">
+          <div className="flex flex-col p-3 z-5 text-constant rounded-b-lg bg-black/10 backdrop-blur-[2px]">
             <h4 className="text-[19px] font-itim">WePadl</h4>
             <h4 className="text-[13px] z-5 font-poppins">350k/hr</h4>
           </div>
@@ -45,7 +45,7 @@ export const Higlight = () => {
           alt="we-padl"
           className="absolute object-cover top-0 z-5 rounded-lg w-full h-full"
         />
-        <div className="flex flex-col p-3 z-5 text-secondary-theme bg-black/10 backdrop-blur-[2px]">
+        <div className="flex flex-col p-3 z-5 text-constant bg-black/10 backdrop-blur-[2px]">
           <h4 className="text-[19px] font-itim">WePadl</h4>
           <h4 className="text-[13px] z-5 font-poppins">350k/hr</h4>
         </div>

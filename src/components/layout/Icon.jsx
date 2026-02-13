@@ -4,7 +4,7 @@ export const Icon = ({ color = "main" }) => {
       <img src="icons/padel.png" className="w-6.25" />
       <h1
         className={`font-itim text-xl ${
-          color == "main" ? "text-main-theme" : "text-secondary-theme"
+          color == "main" ? "text-main-theme" : "text-constant"
         }`}
       >
         PadelPoint

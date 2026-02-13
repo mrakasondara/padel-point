@@ -7,7 +7,7 @@ export const CourtItem = ({ id, court_name, city, rate, price, image_url }) => {
         alt={city}
         className="absolute object-cover top-0 z-5 rounded-lg w-full h-full"
       />
-      <div className="flex flex-col p-3 z-5 text-secondary-theme bg-black/20 backdrop-blur-[2px]">
+      <div className="flex flex-col p-3 z-5 text-constant bg-black/20 backdrop-blur-[2px]">
         <div className="flex flex-col ">
           <h4 className="text-[19px] font-itim">{court_name}</h4>
           <h4 className="text-[13px] z-5 font-poppins">{city}</h4>

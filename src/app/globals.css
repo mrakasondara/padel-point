@@ -8,6 +8,7 @@
   --color-main-theme: #1d1a63;
   --color-secondary-theme: #d9d9d9;
   --color-bg: #ffffff;
+  --color-constant: #d9d9d9;
 }
 
 @theme inline {
@@ -120,6 +121,7 @@
   --sidebar-ring: oklch(0.556 0 0);
   --color-bg: #1d1a63;
   --color-main-theme: #d9d9d9;
+  --color-constant: #d9d9d9;
   --color-secondary-theme: #1d1a63;
 }
 
