@@ -6,7 +6,7 @@ export const Higlight = () => {
     >
       <div className="rounded-lg flex flex-col justify-end relative w-1/2 md:w-[30%] lg:w-[25%] overflow-hidden">
         <img
-          src="images/we-padl.jpg"
+          src="images/courts/we-padl.jpg"
           alt="we-padl"
           className="absolute object-cover top-0 z-5 rounded-lg w-full h-full"
         />
@@ -18,7 +18,7 @@ export const Higlight = () => {
       <div className="flex flex-col w-1/2 md:w-[40%] lg:w-[30%] gap-2">
         <div className="flex flex-col rounded-lg relative w-full h-1/2 justify-end">
           <img
-            src="images/sky-padel.jpg"
+            src="images/courts/sky-padel.jpg"
             alt="we-padl"
             className="absolute object-cover top-0 z-5 rounded-lg h-full w-125"
           />
@@ -29,7 +29,7 @@ export const Higlight = () => {
         </div>
         <div className="flex flex-col justify-end rounded-lg relative h-1/2">
           <img
-            src="images/o-garden.jpg"
+            src="images/courts/o-garden.jpg"
             alt="we-padl"
             className="absolute object-cover top-0 z-5 rounded-lg h-full w-125"
           />
@@ -41,7 +41,7 @@ export const Higlight = () => {
       </div>
       <div className="md:flex flex-col justify-end hidden rounded-lg relative md:w-[30%] lg:w-[25%] h-full overflow-hidden">
         <img
-          src="images/we-padl.jpg"
+          src="images/courts/we-padl.jpg"
           alt="we-padl"
           className="absolute object-cover top-0 z-5 rounded-lg w-full h-full"
         />
