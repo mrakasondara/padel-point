@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/sidebar";
 
 export const ContentSidebar = () => {
-  const pathActive = usePathname();
+  const activePath = usePathname();
   return (
     <SidebarContent className="bg-sidebar px-5 list-none font-itim">
       <SidebarGroup>
@@ -19,7 +19,7 @@ export const ContentSidebar = () => {
           <Link href={"/"}>
             <SidebarMenuButton
               className={`gap-5 text-md lg:text-lg ${
-                pathActive == "/dashboard"
+                activePath == "/dashboard"
                   ? "dark:bg-accent bg-main-theme/30"
                   : ""
               }`}
@@ -33,7 +33,7 @@ export const ContentSidebar = () => {
         <SidebarMenuItem>
           <SidebarMenuButton
             className={`gap-5 text-md lg:text-lg ${
-              pathActive == "/search" ? "dark:bg-accent bg-main-theme/30" : ""
+              activePath == "/search" ? "dark:bg-accent bg-main-theme/30" : ""
             }`}
           >
             <Search /> Search
@@ -44,7 +44,7 @@ export const ContentSidebar = () => {
         <SidebarMenuItem>
           <SidebarMenuButton
             className={`gap-5 text-md lg:text-lg ${
-              pathActive == "/booked" ? "dark:bg-accent bg-main-theme/30" : ""
+              activePath == "/booked" ? "dark:bg-accent bg-main-theme/30" : ""
             }`}
           >
             <CalendarCheck2 /> Booked
@@ -55,7 +55,7 @@ export const ContentSidebar = () => {
         <SidebarMenuItem>
           <SidebarMenuButton
             className={`gap-5 text-md lg:text-lg ${
-              pathActive == "/favorite" ? "dark:bg-accent bg-main-theme/30" : ""
+              activePath == "/favorite" ? "dark:bg-accent bg-main-theme/30" : ""
             }`}
           >
             <Heart /> Favorite

@@ -2,7 +2,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Footer } from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/theme-provider";
-import { HeaderLanding } from "@/components/layout/HeaderLanding";
+import { Header } from "@/components/layout/Header";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
-          <HeaderLanding />
+          <Header />
           {children}
           <Footer />
         </ThemeProvider>
