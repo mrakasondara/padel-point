@@ -1,15 +1,21 @@
 "use client";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Icon } from "./Icon";
 import { ToggleTheme } from "./ToggleTheme";
-export const HeaderDashboard = () => {
+
+export const Header = () => {
+  const activePath = usePathname();
   return (
-    <header className="flex mt-5 items-center mx-5" id="header-dashboard">
-      <Icon />
-      <SidebarTrigger className="cursor-pointer mx-2 text-main-theme" />
+    <header
+      className={`${
+        activePath == "/signin" || activePath == "/signup" ? "hidden" : "flex"
+      } mt-5 items-center mx-5`}
+      id="header-landing"
+    >
+      <Icon id="icon-landing" />
       <div className="flex items-center ml-auto gap-2">
-        <ToggleTheme id="toggle-dashboard" />
+        <ToggleTheme id="toggle-landing" />
         <Button
           variant="outline"
           className="bg-main-theme hover:bg-secondary-theme hover:text-main-theme cursor-pointer transition text-constant font-poppins text-[12px]"

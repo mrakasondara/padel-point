@@ -1,11 +1,19 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Facebook, Instagram } from "lucide-react";
 import { Icon } from "./Icon";
 
 export const Footer = () => {
+  const activePath = usePathname();
   return (
-    <footer className="flex text-white flex-col bg-main-theme dark:bg-bg py-10 px-6 md:px-15 mt-[8rem]">
+    <footer
+      className={`${
+        activePath == "/signin" || activePath == "/signup"
+          ? "hidden"
+          : "flex flex-col"
+      } text-white bg-main-theme dark:bg-bg py-10 px-6 md:px-15 mt-[8rem]`}
+    >
       <div className="flex justify-between">
         <div className="flex flex-col">
           <p className="font-semibold text-lg md:text-xl font-itim">
