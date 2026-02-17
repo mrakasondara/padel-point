@@ -1,7 +1,13 @@
 import { SideImage } from "@/components/auth/SideImage";
 import { SignUpForm } from "@/components/auth/SignUpForm";
+import { getServerSession } from "next-auth";
+import { RedirectType, redirect } from "next/navigation";
 
-export default function Page() {
+export default async function Page() {
+  const user = await getServerSession();
+  if (user) {
+    redirect("/dashboard", RedirectType.replace);
+  }
   return (
     <div className="flex gap-3 h-screen p-5">
       <SideImage page="signup" />

@@ -1,7 +1,18 @@
+import { getServerSession } from "next-auth";
+import { redirect, RedirectType } from "next/navigation";
 import { SideImage } from "@/components/auth/SideImage";
 import { SignInForm } from "@/components/auth/SignInForm";
 
-export default function Page() {
+export const metadata = {
+  title: "Sign In",
+};
+
+export default async function Page() {
+  const user = await getServerSession();
+  console.log({ page_session: user });
+  if (user) {
+    redirect("/dashboard", RedirectType.replace);
+  }
   return (
     <div className="flex gap-3 h-screen p-5">
       <SideImage page="signin" />

@@ -2,7 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { House, Search, CalendarCheck2, Heart } from "lucide-react";
+import {
+  House,
+  Search,
+  CalendarCheck2,
+  Heart,
+  Users,
+  List,
+} from "lucide-react";
 import {
   SidebarContent,
   SidebarGroup,
@@ -10,8 +17,9 @@ import {
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
 
-export const ContentSidebar = () => {
+export const ContentSidebar = ({ data }) => {
   const activePath = usePathname();
+
   return (
     <SidebarContent className="bg-sidebar px-5 list-none font-itim">
       <SidebarGroup>
@@ -33,35 +41,75 @@ export const ContentSidebar = () => {
         <SidebarMenuItem>
           <SidebarMenuButton
             className={`gap-5 text-md lg:text-lg ${
-              activePath == "/search" ? "dark:bg-accent bg-main-theme/30" : ""
+              activePath == "/dashboard/search"
+                ? "dark:bg-accent bg-main-theme/30"
+                : ""
             }`}
           >
             <Search /> Search
           </SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarGroup>
-      <SidebarGroup>
-        <SidebarMenuItem>
-          <SidebarMenuButton
-            className={`gap-5 text-md lg:text-lg ${
-              activePath == "/booked" ? "dark:bg-accent bg-main-theme/30" : ""
-            }`}
-          >
-            <CalendarCheck2 /> Booked
-          </SidebarMenuButton>
-        </SidebarMenuItem>
-      </SidebarGroup>
-      <SidebarGroup>
-        <SidebarMenuItem>
-          <SidebarMenuButton
-            className={`gap-5 text-md lg:text-lg ${
-              activePath == "/favorite" ? "dark:bg-accent bg-main-theme/30" : ""
-            }`}
-          >
-            <Heart /> Favorite
-          </SidebarMenuButton>
-        </SidebarMenuItem>
-      </SidebarGroup>
+
+      {data?.user.role == "user" ? (
+        <>
+          <SidebarGroup>
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                className={`gap-5 text-md lg:text-lg ${
+                  activePath == "/dashboard/booked"
+                    ? "dark:bg-accent bg-main-theme/30"
+                    : ""
+                }`}
+              >
+                <CalendarCheck2 /> Booked
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarGroup>
+          <SidebarGroup>
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                className={`gap-5 text-md lg:text-lg ${
+                  activePath == "/dashboard/favorite"
+                    ? "dark:bg-accent bg-main-theme/30"
+                    : ""
+                }`}
+              >
+                <Heart /> Favorite
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarGroup>
+        </>
+      ) : (
+        <>
+          <SidebarGroup>
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                className={`gap-5 text-md lg:text-lg ${
+                  activePath == "/dashboard/admin/users"
+                    ? "dark:bg-accent bg-main-theme/30"
+                    : ""
+                }`}
+              >
+                <Users /> Users
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarGroup>
+          <SidebarGroup>
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                className={`gap-5 text-md lg:text-lg ${
+                  activePath == "/dashboard/admin/users"
+                    ? "dark:bg-accent bg-main-theme/30"
+                    : ""
+                }`}
+              >
+                <List /> Courts
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarGroup>
+        </>
+      )}
     </SidebarContent>
   );
 };

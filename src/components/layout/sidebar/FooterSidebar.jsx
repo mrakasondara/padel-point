@@ -9,7 +9,7 @@ import {
   DropdownMenuContent,
 } from "@/components/ui/dropdown-menu";
 
-export const FooterSidebar = () => {
+export const FooterSidebar = ({ data }) => {
   return (
     <SidebarFooter className="bg-sidebar px-5 mb-3">
       <DropdownMenu>
@@ -22,7 +22,7 @@ export const FooterSidebar = () => {
             <div className="flex flex-col text-main-theme font-poppins">
               <h6>Anonim</h6>
               <span className="text-[11.8px] text-black dark:text-constant">
-                anonim@example.co
+                {data?.user.email}
               </span>
             </div>
             <ChevronsDownUp className="ml-auto" />
