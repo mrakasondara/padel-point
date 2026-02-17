@@ -28,7 +28,7 @@ export const ContentSidebar = ({ data }) => {
             <SidebarMenuButton
               className={`gap-5 text-md lg:text-lg ${
                 activePath == "/dashboard"
-                  ? "dark:bg-accent bg-main-theme/30"
+                  ? "dark:bg-accent bg-main-theme/70 text-white"
                   : ""
               }`}
             >
@@ -42,7 +42,7 @@ export const ContentSidebar = ({ data }) => {
           <SidebarMenuButton
             className={`gap-5 text-md lg:text-lg ${
               activePath == "/dashboard/search"
-                ? "dark:bg-accent bg-main-theme/30"
+                ? "dark:bg-accent bg-main-theme/70 text-white"
                 : ""
             }`}
           >
@@ -58,7 +58,7 @@ export const ContentSidebar = ({ data }) => {
               <SidebarMenuButton
                 className={`gap-5 text-md lg:text-lg ${
                   activePath == "/dashboard/booked"
-                    ? "dark:bg-accent bg-main-theme/30"
+                    ? "dark:bg-accent bg-main-theme/70 text-white"
                     : ""
                 }`}
               >
@@ -71,7 +71,7 @@ export const ContentSidebar = ({ data }) => {
               <SidebarMenuButton
                 className={`gap-5 text-md lg:text-lg ${
                   activePath == "/dashboard/favorite"
-                    ? "dark:bg-accent bg-main-theme/30"
+                    ? "dark:bg-accent bg-main-theme/70 text-white"
                     : ""
                 }`}
               >
@@ -87,7 +87,7 @@ export const ContentSidebar = ({ data }) => {
               <SidebarMenuButton
                 className={`gap-5 text-md lg:text-lg ${
                   activePath == "/dashboard/admin/users"
-                    ? "dark:bg-accent bg-main-theme/30"
+                    ? "dark:bg-accent bg-main-theme/70 text-white"
                     : ""
                 }`}
               >
@@ -100,7 +100,7 @@ export const ContentSidebar = ({ data }) => {
               <SidebarMenuButton
                 className={`gap-5 text-md lg:text-lg ${
                   activePath == "/dashboard/admin/users"
-                    ? "dark:bg-accent bg-main-theme/30"
+                    ? "dark:bg-accent bg-main-theme/70 text-white"
                     : ""
                 }`}
               >
