@@ -1,6 +1,6 @@
 import { CourtItem } from "./CourtItem";
 
-export const CourtsList = () => {
+export const CourtsGrid = () => {
   const padelCourts = [
     {
       id: 1,

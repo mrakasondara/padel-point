@@ -24,7 +24,7 @@ export const ContentSidebar = ({ data }) => {
     <SidebarContent className="bg-sidebar px-5 list-none font-itim">
       <SidebarGroup>
         <SidebarMenuItem>
-          <Link href={"/"}>
+          <Link href={"/dashboard"}>
             <SidebarMenuButton
               className={`gap-5 text-md lg:text-lg ${
                 activePath == "/dashboard"
@@ -84,28 +84,32 @@ export const ContentSidebar = ({ data }) => {
         <>
           <SidebarGroup>
             <SidebarMenuItem>
-              <SidebarMenuButton
-                className={`gap-5 text-md lg:text-lg ${
-                  activePath == "/dashboard/admin/users"
-                    ? "dark:bg-accent bg-main-theme/70 text-white"
-                    : ""
-                }`}
-              >
-                <Users /> Users
-              </SidebarMenuButton>
+              <Link href="/dashboard/admin/users">
+                <SidebarMenuButton
+                  className={`gap-5 text-md lg:text-lg ${
+                    activePath == "/dashboard/admin/users"
+                      ? "dark:bg-accent bg-main-theme/70 text-white"
+                      : ""
+                  }`}
+                >
+                  <Users /> Users
+                </SidebarMenuButton>
+              </Link>
             </SidebarMenuItem>
           </SidebarGroup>
           <SidebarGroup>
             <SidebarMenuItem>
-              <SidebarMenuButton
-                className={`gap-5 text-md lg:text-lg ${
-                  activePath == "/dashboard/admin/users"
-                    ? "dark:bg-accent bg-main-theme/70 text-white"
-                    : ""
-                }`}
-              >
-                <List /> Courts
-              </SidebarMenuButton>
+              <Link href="/dashboard/admin/courts">
+                <SidebarMenuButton
+                  className={`gap-5 text-md lg:text-lg ${
+                    activePath == "/dashboard/admin/courts"
+                      ? "dark:bg-accent bg-main-theme/70 text-white"
+                      : ""
+                  }`}
+                >
+                  <List /> Courts
+                </SidebarMenuButton>
+              </Link>
             </SidebarMenuItem>
           </SidebarGroup>
         </>

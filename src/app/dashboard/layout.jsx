@@ -1,7 +1,15 @@
+import { getServerSession } from "next-auth";
+import { RedirectType, redirect } from "next/navigation";
 import { AppSidebar } from "@/components/layout/sidebar/AppSidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { authOptions } from "../api/auth/[...nextauth]/route";
 
-export default function Layout({ children }) {
+export default async function Layout({ children }) {
+  const user = await getServerSession(authOptions);
+  if (!user) {
+    return redirect("/signin", RedirectType.replace);
+  }
+
   return (
     <SidebarProvider defaultOpen={false}>
       <AppSidebar />
