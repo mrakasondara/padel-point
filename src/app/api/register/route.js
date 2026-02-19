@@ -1,27 +1,21 @@
-import { NextResponse } from "next/server";
-import bcrypt from "bcrypt";
 import { connectDB } from "@/database";
-import { mongoURI } from "../../../../constant";
 import { User } from "@/database/models/user";
+import bcrypt from "bcrypt";
+import { NextResponse } from "next/server";
+
+import { mongoURI } from "../../../../constant";
 
 const encryptPassword = async (password) => {
   const hashedPassword = await bcrypt.hash(password, 11);
   return hashedPassword;
 };
 
-export async function GET(req) {
-  try {
-    await connectDB(mongoURI);
-    return NextResponse.json({ message: "Connecting Succesfully" });
-  } catch (error) {
-    return NextResponse.json({ message: "Connecting Failed" });
-  }
-}
-
 export async function POST(req) {
   try {
     const userData = await req.json();
     const { email, password } = userData;
+
+    await connectDB(mongoURI);
 
     const isEmailExist = await User.findOne({ email });
 

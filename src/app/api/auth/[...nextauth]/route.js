@@ -1,10 +1,11 @@
-import NextAuth from "next-auth/next";
-import CredentialsProviders from "next-auth/providers/credentials";
-import bcrypt from "bcrypt";
 import { connectDB } from "@/database";
-import { mongoURI } from "../../../../../constant";
 import { Admin } from "@/database/models/admin";
 import { User } from "@/database/models/user";
+import bcrypt from "bcrypt";
+import NextAuth from "next-auth/next";
+import CredentialsProviders from "next-auth/providers/credentials";
+
+import { mongoURI } from "../../../../../constant";
 
 export const authOptions = {
   providers: [
@@ -37,14 +38,20 @@ export const authOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.email = user.email;
-        const isAdmin = await Admin.findOne({ email: user.email });
-        token.role = isAdmin ? "admin" : "user";
       }
+
+      if (!token.role && token.email) {
+        const isAdmin = await Admin.findOne({ email: user.email });
+        token.role = isAdmin ? isAdmin.role : "user";
+      }
+
       return token;
     },
     async session({ session, token }) {
-      session.user.email = token.email;
-      session.user.role = token.role;
+      if (token) {
+        session.user.email = token.email;
+        session.user.role = token.role;
+      }
       return session;
     },
   },
