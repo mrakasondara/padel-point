@@ -1,7 +1,7 @@
-import { getServerSession } from "next-auth";
-import { redirect, RedirectType } from "next/navigation";
 import { SideImage } from "@/components/auth/SideImage";
 import { SignInForm } from "@/components/auth/SignInForm";
+import { getServerSession } from "next-auth";
+import { redirect, RedirectType } from "next/navigation";
 
 export const metadata = {
   title: "Sign In",
@@ -9,7 +9,6 @@ export const metadata = {
 
 export default async function Page() {
   const user = await getServerSession();
-  console.log({ page_session: user });
   if (user) {
     redirect("/dashboard", RedirectType.replace);
   }
