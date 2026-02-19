@@ -2,6 +2,14 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   Dialog,
   DialogContent,
   DialogDescription,
@@ -85,14 +93,17 @@ export const UsersDialog = () => {
               <label className="" htmlFor="gender">
                 Gender
               </label>
-              <Input
-                id="gender"
-                name="gender"
-                placeholder="Male"
-                value={formData.gender}
-                onChange={handleChange}
-                className="rounded-sm text-sm"
-              />
+              <Select>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Gender" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectItem value="male">Male</SelectItem>
+                    <SelectItem value="female">Female</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
             </div>
             <div className="flex flex-col gap-1">
               <label className="" htmlFor="phone">

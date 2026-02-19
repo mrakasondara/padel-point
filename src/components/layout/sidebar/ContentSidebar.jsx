@@ -82,21 +82,25 @@ export const ContentSidebar = ({ data }) => {
         </>
       ) : (
         <>
-          <SidebarGroup>
-            <SidebarMenuItem>
-              <Link href="/dashboard/admin/users">
-                <SidebarMenuButton
-                  className={`gap-5 text-md lg:text-lg ${
-                    activePath == "/dashboard/admin/users"
-                      ? "dark:bg-accent bg-main-theme/70 text-white"
-                      : ""
-                  }`}
-                >
-                  <Users /> Users
-                </SidebarMenuButton>
-              </Link>
-            </SidebarMenuItem>
-          </SidebarGroup>
+          {data?.user.role == "superadmin" ? (
+            <SidebarGroup>
+              <SidebarMenuItem>
+                <Link href="/dashboard/admin/users">
+                  <SidebarMenuButton
+                    className={`gap-5 text-md lg:text-lg ${
+                      activePath == "/dashboard/admin/users"
+                        ? "dark:bg-accent bg-main-theme/70 text-white"
+                        : ""
+                    }`}
+                  >
+                    <Users /> Users
+                  </SidebarMenuButton>
+                </Link>
+              </SidebarMenuItem>
+            </SidebarGroup>
+          ) : (
+            ""
+          )}
           <SidebarGroup>
             <SidebarMenuItem>
               <Link href="/dashboard/admin/courts">
