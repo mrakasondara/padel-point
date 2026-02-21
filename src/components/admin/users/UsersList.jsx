@@ -1,12 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import {
   Table,
   TableBody,
@@ -16,19 +8,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  EllipsisVertical,
-  ExternalLink,
-  SquarePen,
-  Trash,
-  Venus,
-  Mars,
-} from "lucide-react";
+import { Venus, Mars } from "lucide-react";
+import { UsersDropdownActions } from "./UsersDropdownActions";
 
-export const UsersList = ({ users }) => {
+export const UsersList = ({ users, fetchUsers }) => {
   return (
     <Table className="mb-5">
-      <TableCaption>A list of users.</TableCaption>
+      <TableCaption>
+        A list of users.{" "}
+        <span className="text-yellow-500">
+          User access will be updated after logout
+        </span>
+      </TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead className="text-main-theme font-semibold">
@@ -63,37 +54,11 @@ export const UsersList = ({ users }) => {
                   )}
                 </div>
               </TableCell>
-              <TableCell>{users?.phone}</TableCell>
-              <TableCell>{users?.city_address}</TableCell>
+              <TableCell>{user?.phone}</TableCell>
+              <TableCell>{user?.city_address}</TableCell>
               <TableCell className="capitalize">{user?.role}</TableCell>
               <TableCell className="text-right">
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      variant="outline"
-                      className="text-main-theme dark:text-constant cursor-pointer hover:bg-main-theme hover:text-secondary-theme transition-colors duration-300 ease-in-out"
-                      disabled={user?.role == "superadmin" ? true : false}
-                    >
-                      <EllipsisVertical />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <DropdownMenuGroup>
-                      <DropdownMenuItem>
-                        <ExternalLink />
-                        Detail
-                      </DropdownMenuItem>
-                      <DropdownMenuItem>
-                        <SquarePen />
-                        Edit
-                      </DropdownMenuItem>
-                      <DropdownMenuItem>
-                        <Trash />
-                        Delete
-                      </DropdownMenuItem>
-                    </DropdownMenuGroup>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                <UsersDropdownActions user={user} fetchUsers={fetchUsers} />
               </TableCell>
             </TableRow>
           );

@@ -1,14 +1,8 @@
 import { connectDB } from "@/database";
 import { User } from "@/database/models/user";
-import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
-
 import { mongoURI } from "../../../../constant";
-
-const encryptPassword = async (password) => {
-  const hashedPassword = await bcrypt.hash(password, 11);
-  return hashedPassword;
-};
+import { encryptPassword } from "@/lib/auth";
 
 export async function POST(req) {
   try {

@@ -11,9 +11,9 @@ import { toast } from "sonner";
 
 export default function Users() {
   const { data } = useSession();
-  if (data?.user.role != "superadmin") {
-    redirect("/dashboard", RedirectType.replace);
-  }
+  // if (data?.user.role != "superadmin") {
+  //   redirect("/dashboard", RedirectType.replace);
+  // }
 
   const [users, setUsers] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -48,7 +48,7 @@ export default function Users() {
       ) : (
         <>
           <UsersDialog fetchUsers={fetchUsers} />
-          <UsersList users={users} />
+          <UsersList users={users} fetchUsers={fetchUsers} />
         </>
       )}
     </div>
