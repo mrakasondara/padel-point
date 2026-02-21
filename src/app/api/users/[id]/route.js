@@ -44,3 +44,52 @@ export async function PUT(req, { params }) {
     );
   }
 }
+
+export async function DELETE(req, { params }) {
+  const notAdmin = await authCheckIsAdmin(req);
+  if (notAdmin) return notAdmin;
+
+  const { id } = await params;
+  try {
+    await connectDB(mongoURI);
+    const targetedUser = await User.findById(id, "email");
+    const checkIsAdmin = await Admin.findOne(
+      {
+        email: targetedUser.email,
+      },
+      "email"
+    );
+
+    await User.deleteOne({ _id: id });
+
+    if (checkIsAdmin) {
+      await Admin.deleteOne({ email: targetedUser.email });
+    }
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Users successfully deleted.",
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    if (error.name === "CastError" && error.kind === "ObjectId") {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "resource error",
+        },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(
+      {
+        success: false,
+        message: error.message,
+      },
+      { status: 401 }
+    );
+  }
+}

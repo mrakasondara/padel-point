@@ -33,6 +33,17 @@ class adminPadelAPI {
       console.error(error);
     }
   }
+  static async deleteUser(id) {
+    try {
+      const response = await fetch(`${baseAPI}/users/${id}`, {
+        method: "DELETE",
+      });
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }
 
 export default adminPadelAPI;

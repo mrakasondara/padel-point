@@ -6,9 +6,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { EllipsisVertical, ExternalLink, Trash } from "lucide-react";
-
+import { EllipsisVertical, ExternalLink } from "lucide-react";
 import { UsersEditDialog } from "./UsersEditDialog";
+import { UsersDeleteDialog } from "./UsersDeleteDialog";
 
 export const UsersDropdownActions = ({ user, fetchUsers }) => {
   return (
@@ -29,10 +29,7 @@ export const UsersDropdownActions = ({ user, fetchUsers }) => {
             Detail
           </DropdownMenuItem>
           <UsersEditDialog user={user} fetchUsers={fetchUsers} />
-          <DropdownMenuItem>
-            <Trash />
-            Delete
-          </DropdownMenuItem>
+          <UsersDeleteDialog id={user?._id} fetchUsers={fetchUsers} />
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>

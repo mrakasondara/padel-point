@@ -47,10 +47,10 @@ export const UsersList = ({ users, fetchUsers }) => {
               <TableCell>{user?.email}</TableCell>
               <TableCell>
                 <div className="flex gap-2 items-center">
-                  {user?.gender == "male" ? (
-                    <Mars size="17" />
-                  ) : (
+                  {user?.gender == "female" ? (
                     <Venus size="17" />
+                  ) : (
+                    <Mars size="17" />
                   )}
                 </div>
               </TableCell>
