@@ -1,4 +1,4 @@
-import { CourtsGrid } from "@/components/explore-courts/CourtsGrid";
+import { CourtsGrid } from "@/components/dashboard/explore-courts/CourtsGrid";
 
 export default function Dashboard() {
   return (

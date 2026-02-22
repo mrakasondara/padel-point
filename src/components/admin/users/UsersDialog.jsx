@@ -76,7 +76,7 @@ export const UsersDialog = ({ fetchUsers }) => {
   return (
     <Dialog>
       <DialogTrigger
-        className="mt-3 w-30 ml-auto bg-main-theme hover:bg-accent hover:text-main-theme dark:bg-input/30 dark:hover:bg-input/50 text-secondary-theme dark:text-constant dark:border cursor-pointer rounded-md py-1 transition-colors duration-300 ease-in-out"
+        className="mt-3 w-26 ml-auto bg-main-theme hover:bg-accent hover:text-main-theme dark:bg-input/30 dark:hover:bg-input/50 text-secondary-theme dark:text-constant dark:border cursor-pointer rounded-md py-1 transition-colors duration-300 ease-in-out"
         variant="outline"
       >
         Add users
