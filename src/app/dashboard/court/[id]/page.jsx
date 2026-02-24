@@ -27,13 +27,13 @@ export default async function Page({ params }) {
             <h2 className="text-3xl font-itim text-main-theme">
               Major Padel Court
             </h2>
-            <p className="flex gap-2 items-center text-[14px]">
+            <div className="flex gap-2 items-center text-[14px]">
               <div className="flex gap-2 items-center">
                 <MapPinned size="13" />
-                West Jakarta, Jakarta, Indonesia
+                <p>West Jakarta, Jakarta, Indonesia</p>
               </div>
-            </p>
-            <p className="flex gap-2 items-center text-[14px]">
+            </div>
+            <div className="flex gap-2 items-center text-[14px]">
               <div className="flex items-center gap-1">
                 <Star size="14" color="#1d1a63" />
                 <span className="font-semibold">4.8</span>Rating
@@ -41,7 +41,7 @@ export default async function Page({ params }) {
               <p>
                 <span className="font-semibold">14</span> Reviews
               </p>
-            </p>
+            </div>
           </section>
 
           <section className="flex flex-col gap-10 mt-10 w-full">
@@ -89,7 +89,7 @@ export default async function Page({ params }) {
           </section>
         </div>
 
-        <div className="grid mt-12 p-3 ">
+        <div className="grid mt-10 p-3 ">
           <CalendarBook />
         </div>
       </div>
