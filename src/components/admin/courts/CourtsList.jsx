@@ -5,10 +5,9 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import Link from "next/link";
 import {
   Table,
   TableBody,
@@ -20,10 +19,13 @@ import {
 } from "@/components/ui/table";
 import { EllipsisVertical, ExternalLink, SquarePen, Trash } from "lucide-react";
 
-export const CourtsList = () => {
+export const CourtsList = ({ data }) => {
+  console.log(data);
   return (
     <Table className="mb-5">
-      <TableCaption>A list of courts.</TableCaption>
+      <TableCaption>
+        {data.length ? "A list of courts." : "You didn`t have any court"}
+      </TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead className="text-main-theme font-semibold">
@@ -39,42 +41,52 @@ export const CourtsList = () => {
           </TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody>
-        <TableRow>
-          <TableCell>WePadl</TableCell>
-          <TableCell>550k/hr</TableCell>
-          <TableCell>Jakarta</TableCell>
-          <TableCell>West Jakarta</TableCell>
-          <TableCell className="text-right">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="outline"
-                  className="text-main-theme dark:text-constant cursor-pointer hover:bg-main-theme hover:text-secondary-theme transition-colors duration-300 ease-in-out"
-                >
-                  <EllipsisVertical />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuGroup>
-                  <DropdownMenuItem>
-                    <ExternalLink />
-                    Detail
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <SquarePen />
-                    Edit
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Trash />
-                    Delete
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </TableCell>
-        </TableRow>
-      </TableBody>
+      {data.length ? (
+        <TableBody>
+          {data.map((court) => {
+            return (
+              <TableRow key={court._id}>
+                <TableCell>{court.court_name}</TableCell>
+                <TableCell>{court.price}/hr</TableCell>
+                <TableCell>{court.city}</TableCell>
+                <TableCell>{court.address}</TableCell>
+                <TableCell className="text-right">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button
+                        variant="outline"
+                        className="text-main-theme dark:text-constant cursor-pointer hover:bg-main-theme hover:text-secondary-theme transition-colors duration-300 ease-in-out"
+                      >
+                        <EllipsisVertical />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuGroup>
+                        <Link href={`/dashboard/court/${court._id}`}>
+                          <DropdownMenuItem>
+                            <ExternalLink />
+                            Detail
+                          </DropdownMenuItem>
+                        </Link>
+                        <DropdownMenuItem>
+                          <SquarePen />
+                          Edit
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                          <Trash />
+                          Delete
+                        </DropdownMenuItem>
+                      </DropdownMenuGroup>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      ) : (
+        ""
+      )}
     </Table>
   );
 };

@@ -10,16 +10,24 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { FacilitiesCheckbox } from "./FacilitiesCheckbox";
+import adminPadelAPI from "@/lib/adminPadelAPI";
+import { Spinner } from "@/components/ui/spinner";
+import { toast } from "sonner";
+import { errorStyle, successStyle } from "@/lib/toster-styles";
 
 export const CourtsDialog = () => {
   const [formData, setFormData] = useState({
     court_name: "",
-    price: "",
+    description: "",
+    price: 0,
     city: "",
     address: "",
   });
-
+  const [facilities, setFacilities] = useState([]);
   const [image, setImage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,8 +37,40 @@ export const CourtsDialog = () => {
     }));
   };
 
+  const handleChecked = (value) => {
+    setFacilities((prev) =>
+      prev.includes(value)
+        ? prev.filter((item) => item != value)
+        : [...prev, value]
+    );
+  };
+
   const onAddCourt = async (e) => {
     e.preventDefault();
+
+    const data = new FormData();
+
+    data.set("court_name", formData.court_name);
+    data.set("description", formData.description);
+    data.set("price", formData.price);
+    data.set("city", formData.city);
+    data.set("address", formData.address);
+    data.set("facilities", facilities);
+    data.set("image_thumb", image);
+
+    try {
+      setIsLoading(true);
+      const response = await adminPadelAPI.addCourt(data);
+      if (response?.success) {
+        toast.success(response.message, { style: successStyle });
+      } else {
+        toast.error(response.message, { style: errorStyle });
+      }
+    } catch (error) {
+      toast.error(error.message, { style: errorStyle });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -64,8 +104,24 @@ export const CourtsDialog = () => {
                 value={formData.court_name}
                 onChange={handleChange}
                 className="rounded-sm text-sm"
+                required
               />
             </div>
+
+            <div className="flex flex-col gap-1">
+              <label className="" htmlFor="description">
+                Description
+              </label>
+              <Textarea
+                id="description"
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                className="rounded-sm text-sm"
+                required
+              />
+            </div>
+
             <div className="flex flex-col gap-1">
               <label className="" htmlFor="price">
                 Price
@@ -74,10 +130,13 @@ export const CourtsDialog = () => {
                 id="price"
                 name="price"
                 placeholder="Price/hr"
+                type="number"
                 value={formData.price}
                 onChange={handleChange}
                 className="rounded-sm text-sm"
+                required
               />
+              <span className="text-[11px] text-yellow-500">price/hour</span>
             </div>
             <div className="flex flex-col gap-1">
               <label className="" htmlFor="city">
@@ -90,6 +149,7 @@ export const CourtsDialog = () => {
                 value={formData.city}
                 onChange={handleChange}
                 className="rounded-sm text-sm"
+                required
               />
             </div>
             <div className="flex flex-col gap-1">
@@ -103,8 +163,15 @@ export const CourtsDialog = () => {
                 value={formData.address}
                 onChange={handleChange}
                 className="rounded-sm text-sm"
+                required
               />
             </div>
+
+            <FacilitiesCheckbox
+              facilities={facilities}
+              handleChecked={handleChecked}
+            />
+
             <div className="flex flex-col gap-1">
               <label className="" htmlFor="image">
                 Image
@@ -113,15 +180,16 @@ export const CourtsDialog = () => {
                 type="file"
                 name="image"
                 id="image"
-                value={image}
                 onChange={(e) => setImage(e.target.files[0])}
                 className="rounded-sm text-sm"
+                required
               />
             </div>
             <Button
               className="w-full md:w-25 mt-3 ml-auto bg-main-theme text-white cursor-pointer hover:text-main-theme transition"
               variant="outline"
             >
+              {isLoading ? <Spinner /> : ""}
               Save
             </Button>
           </form>

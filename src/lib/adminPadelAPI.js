@@ -9,7 +9,7 @@ class adminPadelAPI {
       console.error(error);
     }
   }
-  static async addUsers(userData) {
+  static async addUser(userData) {
     try {
       const response = await fetch(`${baseAPI}/users`, {
         method: "POST",
@@ -38,6 +38,36 @@ class adminPadelAPI {
       const response = await fetch(`${baseAPI}/users/${id}`, {
         method: "DELETE",
       });
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  static async addCourt(courtData) {
+    try {
+      const response = await fetch(`${baseAPI}/courts`, {
+        method: "POST",
+        body: courtData,
+      });
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  static async getCourts() {
+    try {
+      const response = await fetch(`${baseAPI}/courts`);
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  static async getDetailCourt(id) {
+    try {
+      const response = await fetch(`${baseAPI}/courts/${id}`);
       const data = response.json();
       return data;
     } catch (error) {
