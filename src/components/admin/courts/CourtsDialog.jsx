@@ -12,7 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { FacilitiesCheckbox } from "./FacilitiesCheckbox";
-import adminPadelAPI from "@/lib/adminPadelAPI";
+import adminPadelAPI from "@/lib/services/api/adminPadelAPI";
 import { Spinner } from "@/components/ui/spinner";
 import { toast } from "sonner";
 import { errorStyle, successStyle } from "@/lib/toster-styles";

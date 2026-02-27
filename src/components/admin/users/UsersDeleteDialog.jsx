@@ -11,7 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import adminPadelAPI from "@/lib/adminPadelAPI";
+import adminPadelAPI from "@/lib/services/api/adminPadelAPI";
 import { toast } from "sonner";
 import { errorStyle, successStyle } from "@/lib/toster-styles";
 import { Spinner } from "@/components/ui/spinner";

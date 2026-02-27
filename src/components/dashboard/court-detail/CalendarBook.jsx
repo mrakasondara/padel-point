@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { id } from "date-fns/locale";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import {
@@ -19,6 +20,11 @@ export const CalendarBook = () => {
     new Date(new Date().getFullYear(), new Date().getMonth(), 12)
   );
   const [selectedTime, setSelectedTime] = useState("");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const court = {
     id: "09121212",
@@ -96,6 +102,8 @@ export const CalendarBook = () => {
     console.log(courtAddToCart);
   };
 
+  if (!mounted) return null;
+
   return (
     <Card size="sm" className="w-fit mx-auto md:mx-0">
       <CardContent>
@@ -106,6 +114,7 @@ export const CalendarBook = () => {
           onSelect={setSelectedDate}
           className="p-0"
           disabled={fullyBookedDates}
+          locale={id}
           modifiers={{
             booked: fullyBookedDates,
           }}

@@ -7,7 +7,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Icon } from "../layout/Icon";
-import PadelApi from "@/lib/padelAPI";
+import PadelApi from "@/lib/services/api/padelAPI";
 import { errorStyle, successStyle, warningStyle } from "@/lib/toster-styles";
 import { useRouter } from "next/navigation";
 

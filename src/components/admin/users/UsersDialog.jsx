@@ -8,7 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import adminPadelAPI from "@/lib/adminPadelAPI";
+import adminPadelAPI from "@/lib/services/api/adminPadelAPI";
 import { toast } from "sonner";
 import { errorStyle, successStyle } from "@/lib/toster-styles";
 import { FormAddUser } from "./FormAddUser";
@@ -50,7 +50,7 @@ export const UsersDialog = ({ fetchUsers }) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await adminPadelAPI.addUsers(formData);
+      const response = await adminPadelAPI.addUser(formData);
       if (response?.success) {
         toast.success(response.message, { style: successStyle });
         await fetchUsers();

@@ -35,7 +35,7 @@ export default async function Page({ params }) {
             </div>
             <div className="flex gap-2 items-center text-[14px]">
               <div className="flex items-center gap-1">
-                <Star size="14" color="#1d1a63" />
+                <Star size="14" className="text-main-theme" />
                 <span className="font-semibold">4.8</span>Rating
               </div>
               <p>
@@ -61,27 +61,27 @@ export default async function Page({ params }) {
               </h3>
               <div className="grid grid-cols-2 p-3 gap-5">
                 <div className="flex gap-2 items-center text-[13px]">
-                  <Hamburger color="#1d1a63" />
+                  <Hamburger className="text-main-theme" />
                   <span>Cafe</span>
                 </div>
                 <div className="flex gap-2 items-center text-[13px]">
-                  <Wifi color="#1d1a63" />
+                  <Wifi className="text-main-theme" />
                   <span>Wifi</span>
                 </div>
                 <div className="flex gap-2 items-center text-[13px]">
-                  <EvCharger color="#1d1a63" />
+                  <EvCharger className="text-main-theme" />
                   <span>Ev Charger</span>
                 </div>
                 <div className="flex gap-2 items-center text-[13px]">
-                  <SquareParking color="#1d1a63" />
+                  <SquareParking className="text-main-theme" />
                   <span>Free Parking</span>
                 </div>
                 <div className="flex gap-2 items-center text-[13px]">
-                  <Toilet color="#1d1a63" />
+                  <Toilet className="text-main-theme" />
                   <span>Toilet</span>
                 </div>
                 <div className="flex gap-2 items-center text-[13px]">
-                  <Building2 color="#1d1a63" />
+                  <Building2 className="text-main-theme" />
                   <span>Prayer Room</span>
                 </div>
               </div>

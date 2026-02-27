@@ -1,7 +1,7 @@
 import { CourtsDialog } from "@/components/admin/courts/CourtsDialog";
 import { CourtsList } from "@/components/admin/courts/CourtsList";
 import { Spinner } from "@/components/ui/spinner";
-import adminPadelAPI from "@/lib/adminPadelAPI";
+import adminPadelAPI from "@/lib/services/api/adminPadelAPI";
 import { Suspense } from "react";
 
 export default async function Courts() {

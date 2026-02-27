@@ -21,7 +21,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import adminPadelAPI from "@/lib/adminPadelAPI";
+import adminPadelAPI from "@/lib/services/api/adminPadelAPI";
 import { errorStyle, successStyle } from "@/lib/toster-styles";
 
 export const UsersEditDialog = ({ user, fetchUsers }) => {

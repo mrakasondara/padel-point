@@ -2,7 +2,7 @@
 import { UsersDialog } from "@/components/admin/users/UsersDialog";
 import { UsersList } from "@/components/admin/users/UsersList";
 import { Loading } from "@/components/layout/Loading";
-import adminPadelAPI from "@/lib/adminPadelAPI";
+import adminPadelAPI from "@/lib/services/api/adminPadelAPI";
 import { errorStyle } from "@/lib/toster-styles";
 import { useSession } from "next-auth/react";
 import { redirect, RedirectType } from "next/navigation";
