@@ -1,15 +1,14 @@
 import { Button } from "@/components/ui/button";
-import { Field, FieldLabel } from "@/components/ui/field";
 import { Textarea } from "@/components/ui/textarea";
 
-export const Comments = () => {
+export const Comments = ({ reviews }) => {
   return (
     <div className="flex flex-col gap-5">
       <div className="grid w-full gap-3">
         <h3 className="font-semibold font-itim text-lg ">
           Comments{" "}
           <span className="bg-main-theme text-secondary-theme p-1 ml-1 text-sm">
-            10
+            {reviews?.length ?? "0"}
           </span>
         </h3>
         <Textarea

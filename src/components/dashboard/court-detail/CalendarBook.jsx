@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { id } from "date-fns/locale";
+import toRupiah from "@develoka/angka-rupiah-js";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import {
@@ -15,7 +16,7 @@ import {
 import { Clock2Icon, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export const CalendarBook = () => {
+export const CalendarBook = ({ price }) => {
   const [selectedDate, setSelectedDate] = useState(
     new Date(new Date().getFullYear(), new Date().getMonth(), 12)
   );
@@ -170,7 +171,9 @@ export const CalendarBook = () => {
             </SelectContent>
           </Select>
           <div className="flex flex-col mt-1 items-center">
-            <p className="text-sm text-main-theme">Rp. 110.000</p>
+            <p className="text-sm text-main-theme">
+              {toRupiah(price, { dot: ",", floatingPoint: 0 })}
+            </p>
             <Button
               type="submit"
               variant="outline"

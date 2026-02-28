@@ -1,5 +1,3 @@
-import CourtServices from "../court-services";
-
 const baseAPI = process.env.NEXT_PUBLIC_BASE_API;
 class adminPadelAPI {
   static async getUsers() {
@@ -59,10 +57,6 @@ class adminPadelAPI {
     }
   }
   static async getCourts() {
-    if (typeof window === "undefined") {
-      return await CourtServices.getCourts();
-    }
-
     try {
       const response = await fetch(`${baseAPI}/courts`);
       const data = response.json();
@@ -72,10 +66,6 @@ class adminPadelAPI {
     }
   }
   static async getDetailCourt(id) {
-    if (typeof window === "undefined") {
-      return await CourtServices.getCourtDetail(id);
-    }
-
     try {
       const response = await fetch(`${baseAPI}/courts/${id}`);
       const data = response.json();

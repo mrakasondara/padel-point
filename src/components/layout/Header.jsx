@@ -5,6 +5,7 @@ import { signOut, useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Icon } from "./Icon";
 import { ToggleTheme } from "./ToggleTheme";
+import { Cart } from "./cart/Cart";
 
 export const Header = () => {
   const activePath = usePathname();
@@ -21,14 +22,17 @@ export const Header = () => {
         <ToggleTheme id="toggle-landing" />
 
         {data ? (
-          <Button
-            variant="outline"
-            className="bg-red-500/90 hover:bg-secondary-theme hover:text-red-500/90 dark:hover:text-constant cursor-pointer transition text-constant font-poppins text-[12px]"
-            size="sm"
-            onClick={() => signOut()}
-          >
-            Logout
-          </Button>
+          <>
+            {data.user.role != "user" && <Cart />}
+            <Button
+              variant="outline"
+              className="bg-red-500/90 hover:bg-secondary-theme hover:text-red-500/90 dark:hover:text-constant cursor-pointer transition text-constant font-poppins text-[12px]"
+              size="sm"
+              onClick={() => signOut()}
+            >
+              Logout
+            </Button>
+          </>
         ) : (
           ""
         )}

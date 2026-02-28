@@ -1,4 +1,8 @@
 "use client";
+import Link from "next/link";
+import toRupiah from "@develoka/angka-rupiah-js";
+import { EllipsisVertical, ExternalLink, SquarePen, Trash } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -7,7 +11,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import Link from "next/link";
 import {
   Table,
   TableBody,
@@ -17,14 +20,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { EllipsisVertical, ExternalLink, SquarePen, Trash } from "lucide-react";
 
 export const CourtsList = ({ data }) => {
-  console.log(data);
   return (
     <Table className="mb-5">
       <TableCaption>
-        {data.length ? "A list of courts." : "You didn`t have any court"}
+        {data?.length ? "A list of courts." : "You didn`t have any court"}
       </TableCaption>
       <TableHeader>
         <TableRow>
@@ -41,13 +42,16 @@ export const CourtsList = ({ data }) => {
           </TableHead>
         </TableRow>
       </TableHeader>
-      {data.length ? (
+      {data?.length ? (
         <TableBody>
-          {data.map((court) => {
+          {data?.map((court) => {
             return (
               <TableRow key={court._id}>
                 <TableCell>{court.court_name}</TableCell>
-                <TableCell>{court.price}/hr</TableCell>
+                <TableCell>
+                  {toRupiah(court.price, { useUnit: true, floatingPoint: 0 })}
+                  /hr
+                </TableCell>
                 <TableCell>{court.city}</TableCell>
                 <TableCell>{court.address}</TableCell>
                 <TableCell className="text-right">
@@ -62,7 +66,7 @@ export const CourtsList = ({ data }) => {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                       <DropdownMenuGroup>
-                        <Link href={`/dashboard/court/${court._id}`}>
+                        <Link href={`/court/${court._id}`}>
                           <DropdownMenuItem>
                             <ExternalLink />
                             Detail

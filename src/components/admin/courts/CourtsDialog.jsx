@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import {
   Dialog,
@@ -14,10 +15,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { FacilitiesCheckbox } from "./FacilitiesCheckbox";
 import adminPadelAPI from "@/lib/services/api/adminPadelAPI";
 import { Spinner } from "@/components/ui/spinner";
-import { toast } from "sonner";
 import { errorStyle, successStyle } from "@/lib/toster-styles";
 
-export const CourtsDialog = () => {
+export const CourtsDialog = ({ fetchCourts }) => {
   const [formData, setFormData] = useState({
     court_name: "",
     description: "",
@@ -63,6 +63,7 @@ export const CourtsDialog = () => {
       const response = await adminPadelAPI.addCourt(data);
       if (response?.success) {
         toast.success(response.message, { style: successStyle });
+        await fetchCourts();
       } else {
         toast.error(response.message, { style: errorStyle });
       }
