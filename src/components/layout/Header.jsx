@@ -21,22 +21,6 @@ export const Header = () => {
       <div className="flex items-center ml-auto gap-2">
         <ToggleTheme id="toggle-landing" />
 
-        {data ? (
-          <>
-            {data.user.role != "user" && <Cart />}
-            <Button
-              variant="outline"
-              className="bg-red-500/90 hover:bg-secondary-theme hover:text-red-500/90 dark:hover:text-constant cursor-pointer transition text-constant font-poppins text-[12px]"
-              size="sm"
-              onClick={() => signOut()}
-            >
-              Logout
-            </Button>
-          </>
-        ) : (
-          ""
-        )}
-
         {!data ? (
           <Link href="/signin">
             <Button
@@ -61,6 +45,36 @@ export const Header = () => {
               Dashboard
             </Button>
           </Link>
+        ) : (
+          ""
+        )}
+
+        {activePath.startsWith("/court") && data ? (
+          <Link href="/dashboard">
+            <Button
+              variant="outline"
+              className="bg-main-theme hover:bg-secondary-theme hover:text-main-theme cursor-pointer transition text-constant font-poppins text-[12px]"
+              size="sm"
+            >
+              Dashboard
+            </Button>
+          </Link>
+        ) : (
+          ""
+        )}
+
+        {data ? (
+          <>
+            {data.user.role != "user" && <Cart />}
+            <Button
+              variant="outline"
+              className="bg-red-500/90 hover:bg-secondary-theme hover:text-red-500/90 dark:hover:text-constant cursor-pointer transition text-constant font-poppins text-[12px]"
+              size="sm"
+              onClick={() => signOut()}
+            >
+              Logout
+            </Button>
+          </>
         ) : (
           ""
         )}

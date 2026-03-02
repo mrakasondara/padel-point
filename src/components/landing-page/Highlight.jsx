@@ -12,7 +12,7 @@ export const Higlight = () => {
         />
         <div className="flex flex-col p-3 z-5 text-constant bg-black/10 backdrop-blur-[2px]">
           <h4 className="text-[19px] font-itim">WePadl</h4>
-          <h4 className="text-[13px] z-5 font-poppins">350k/hr</h4>
+          <h4 className="text-[13px] z-5 font-poppins">350k/hour</h4>
         </div>
       </div>
       <div className="flex flex-col w-1/2 md:w-[40%] lg:w-[30%] gap-2">
@@ -24,7 +24,7 @@ export const Higlight = () => {
           />
           <div className="flex flex-col p-3 z-5 text-constant rounded-b-lg bg-black/10 backdrop-blur-[2px]">
             <h4 className="text-[19px] font-itim">WePadl</h4>
-            <h4 className="text-[13px] z-5 font-poppins">350k/hr</h4>
+            <h4 className="text-[13px] z-5 font-poppins">350k/hour</h4>
           </div>
         </div>
         <div className="flex flex-col justify-end rounded-lg relative h-1/2">
@@ -35,7 +35,7 @@ export const Higlight = () => {
           />
           <div className="flex flex-col p-3 z-5 text-constant rounded-b-lg bg-black/10 backdrop-blur-[2px]">
             <h4 className="text-[19px] font-itim">WePadl</h4>
-            <h4 className="text-[13px] z-5 font-poppins">350k/hr</h4>
+            <h4 className="text-[13px] z-5 font-poppins">350k/hour</h4>
           </div>
         </div>
       </div>
@@ -47,7 +47,7 @@ export const Higlight = () => {
         />
         <div className="flex flex-col p-3 z-5 text-constant bg-black/10 backdrop-blur-[2px]">
           <h4 className="text-[19px] font-itim">WePadl</h4>
-          <h4 className="text-[13px] z-5 font-poppins">350k/hr</h4>
+          <h4 className="text-[13px] z-5 font-poppins">350k/hour</h4>
         </div>
       </div>
     </div>

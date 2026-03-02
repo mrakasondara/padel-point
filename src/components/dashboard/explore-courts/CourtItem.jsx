@@ -1,5 +1,6 @@
-import { Star } from "lucide-react";
+import { Star, MapPinned } from "lucide-react";
 import toRupiah from "@develoka/angka-rupiah-js";
+
 import Link from "next/link";
 
 export const CourtItem = ({
@@ -25,15 +26,18 @@ export const CourtItem = ({
           >
             <h4 className="text-[19px] font-itim">{court_name}</h4>
           </Link>
-          <h4 className="text-[13px] z-5 font-poppins">{city}</h4>
+          <div className="flex gap-1 items-center">
+            <MapPinned size="11" />
+            <h4 className="text-[13px] z-5 font-poppins">{city}</h4>
+          </div>
         </div>
-        <div className="flex justify-end gap-2 text-[11px]">
+        <div className="flex justify-end gap-2 text-[11px] mt-2">
           <span className="flex items-center gap-1 bg-white/30 backdrop-blur-sm px-3 rounded-lg">
             {rate ?? "-"}
             <Star size="12px" />
           </span>
           <span className="flex items-center gap-1 bg-white/30 backdrop-blur-sm px-3 rounded-lg">
-            {toRupiah(price, { useUnit: true, floatingPoint: 0 })}/hr
+            {toRupiah(price, { useUnit: true, floatingPoint: 0 })}/hour
           </span>
         </div>
       </div>

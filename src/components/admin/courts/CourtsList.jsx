@@ -50,7 +50,7 @@ export const CourtsList = ({ data }) => {
                 <TableCell>{court.court_name}</TableCell>
                 <TableCell>
                   {toRupiah(court.price, { useUnit: true, floatingPoint: 0 })}
-                  /hr
+                  /hour
                 </TableCell>
                 <TableCell>{court.city}</TableCell>
                 <TableCell>{court.address}</TableCell>

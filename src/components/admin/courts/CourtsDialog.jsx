@@ -130,7 +130,7 @@ export const CourtsDialog = ({ fetchCourts }) => {
               <Input
                 id="price"
                 name="price"
-                placeholder="Price/hr"
+                placeholder="Price/hour"
                 type="number"
                 value={formData.price}
                 onChange={handleChange}

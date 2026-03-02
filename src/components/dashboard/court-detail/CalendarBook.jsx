@@ -15,8 +15,14 @@ import {
 } from "@/components/ui/select";
 import { Clock2Icon, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import useStore from "@/lib/services/store";
+import { timesOptions } from "@/lib/time-options";
+import { toast } from "sonner";
+import { warningStyle } from "@/lib/toster-styles";
 
-export const CalendarBook = ({ price }) => {
+export const CalendarBook = ({ court }) => {
+  const { cart, addToCart } = useStore();
+
   const [selectedDate, setSelectedDate] = useState(
     new Date(new Date().getFullYear(), new Date().getMonth(), 12)
   );
@@ -27,63 +33,16 @@ export const CalendarBook = ({ price }) => {
     setMounted(true);
   }, []);
 
-  const court = {
-    id: "09121212",
-    price: "110.000",
-    bookedDates: [
-      {
-        date: "Sat Feb 28 2026 00:00:00 GMT+0700 (Western Indonesia Time)",
-        times: [
-          {
-            time: "08-09",
-            booked: true,
-          },
-          {
-            time: "09-10",
-            booked: true,
-          },
-          {
-            time: "11-12",
-            booked: true,
-          },
-          {
-            time: "13-14",
-            booked: true,
-          },
-        ],
-      },
-      {
-        date: "Fri Feb 27 2026 00:00:00 GMT+0700 (Western Indonesia Time)",
-        times: [
-          {
-            time: "08-09",
-            booked: false,
-          },
-          {
-            time: "09-10",
-            booked: false,
-          },
-          {
-            time: "11-12",
-            booked: true,
-          },
-          {
-            time: "13-14",
-            booked: true,
-          },
-        ],
-      },
-    ],
-  };
+  const [bookedDates, setBookedDates] = useState(court?.bookedDates ?? []);
 
   let fullyBookedDates = new Date(
-    court.bookedDates
-      .filter((item) => item.times.every((time) => time.booked == true))
+    bookedDates
+      ?.filter((item) => item.times?.every((time) => time.booked == true))
       .map((item) => item.date)
   );
 
   const availableTimes = useMemo(() => {
-    const timeBySelectedDate = court.bookedDates.find(
+    const timeBySelectedDate = bookedDates?.find(
       (bookedDate) => bookedDate.date == selectedDate
     );
 
@@ -94,13 +53,22 @@ export const CalendarBook = ({ price }) => {
 
   const onAddToCart = (e) => {
     e.preventDefault();
+
     const courtAddToCart = {
-      id: court.id,
+      id: court._id,
+      court_name: court.court_name,
+      image_thumb: court.image_thumb,
       selectedDate: selectedDate.toString(),
       selectedTime,
+      address: court.address,
       price: court.price,
     };
-    console.log(courtAddToCart);
+
+    if (!selectedTime) {
+      return toast.warning("Chose booked time first", { style: warningStyle });
+    }
+
+    addToCart(courtAddToCart);
   };
 
   if (!mounted) return null;
@@ -135,44 +103,30 @@ export const CalendarBook = ({ price }) => {
               <SelectValue placeholder="Pick Time" />
             </SelectTrigger>
             <SelectContent>
-              {!availableTimes ? (
-                <SelectGroup>
-                  <SelectItem value="08-10">
-                    <Clock2Icon />
-                    08-10 WIB
-                  </SelectItem>
-                  <SelectItem value="10-11">
-                    <Clock2Icon />
-                    10-11 WIB
-                  </SelectItem>
-                  <SelectItem value="12-13">
-                    <Clock2Icon />
-                    12-13 WIB
-                  </SelectItem>
-                  <SelectItem value="14-15">
-                    <Clock2Icon />
-                    14-15 WIB
-                  </SelectItem>
-                </SelectGroup>
-              ) : (
-                availableTimes.map((time, index) => (
-                  <SelectGroup>
-                    <SelectItem
-                      value={time.time}
-                      key={index}
-                      disabled={time.booked ? true : false}
-                    >
-                      <Clock2Icon />
-                      {time.time} WIB
-                    </SelectItem>
-                  </SelectGroup>
-                ))
-              )}
+              <SelectGroup>
+                {!availableTimes
+                  ? timesOptions.map((item, index) => (
+                      <SelectItem value={item} key={index}>
+                        <Clock2Icon />
+                        {item} WIB
+                      </SelectItem>
+                    ))
+                  : availableTimes.map((time, index) => (
+                      <SelectItem
+                        value={time.time}
+                        key={index}
+                        disabled={time.booked ? true : false}
+                      >
+                        <Clock2Icon />
+                        {time.time} WIB
+                      </SelectItem>
+                    ))}
+              </SelectGroup>
             </SelectContent>
           </Select>
           <div className="flex flex-col mt-1 items-center">
             <p className="text-sm text-main-theme">
-              {toRupiah(price, { dot: ",", floatingPoint: 0 })}
+              {toRupiah(court.price, { dot: ",", floatingPoint: 0 })}
             </p>
             <Button
               type="submit"
