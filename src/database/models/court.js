@@ -1,5 +1,15 @@
 import { model, Schema, models } from "mongoose";
 
+const slotTimesSchema = new Schema({
+  time: { type: String, required: true },
+  booked: { type: Boolean, required: true },
+});
+
+const bookedDatesSchema = new Schema({
+  date: { type: Date, required: true },
+  times: [slotTimesSchema],
+});
+
 const courtSchema = new Schema({
   court_name: {
     type: String,
@@ -48,6 +58,19 @@ const courtSchema = new Schema({
   image_thumb: {
     type: String,
   },
+  booked_dates: [bookedDatesSchema],
 });
 
 export const Court = models.Courts || model("Courts", courtSchema);
+
+booked_dates: [
+  {
+    date: "09-11-2025",
+    times: [
+      {
+        time: "10-11",
+        booked: true,
+      },
+    ],
+  },
+];

@@ -18,9 +18,11 @@ import { Button } from "@/components/ui/button";
 import useStore from "@/lib/services/store";
 import { timesOptions } from "@/lib/time-options";
 import { toast } from "sonner";
-import { warningStyle } from "@/lib/toster-styles";
+import { successStyle, warningStyle, errorStyle } from "@/lib/toster-styles";
+import PadelApi from "@/lib/services/api/padelAPI";
+import { Spinner } from "@/components/ui/spinner";
 
-export const CalendarBook = ({ court }) => {
+export const CalendarBook = ({ court, fetch }) => {
   const { cart, addToCart } = useStore();
 
   const [selectedDate, setSelectedDate] = useState(
@@ -28,12 +30,13 @@ export const CalendarBook = ({ court }) => {
   );
   const [selectedTime, setSelectedTime] = useState("");
   const [mounted, setMounted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const [bookedDates, setBookedDates] = useState(court?.bookedDates ?? []);
+  const [bookedDates, setBookedDates] = useState(court?.booked_dates ?? []);
 
   let fullyBookedDates = new Date(
     bookedDates
@@ -43,7 +46,7 @@ export const CalendarBook = ({ court }) => {
 
   const availableTimes = useMemo(() => {
     const timeBySelectedDate = bookedDates?.find(
-      (bookedDate) => bookedDate.date == selectedDate
+      (bookedDate) => bookedDate.date == new Date(selectedDate).toISOString()
     );
 
     if (!timeBySelectedDate) return;
@@ -51,7 +54,7 @@ export const CalendarBook = ({ court }) => {
     return timeBySelectedDate.times;
   }, [selectedDate]);
 
-  const onAddToCart = (e) => {
+  const onAddToCart = async (e) => {
     e.preventDefault();
 
     const courtAddToCart = {
@@ -68,7 +71,32 @@ export const CalendarBook = ({ court }) => {
       return toast.warning("Chose booked time first", { style: warningStyle });
     }
 
-    addToCart(courtAddToCart);
+    const timeBySelectedDate = bookedDates?.find(
+      (bookedDate) => bookedDate.date == new Date(selectedDate).toISOString()
+    );
+
+    try {
+      setIsLoading(true);
+      const response = await PadelApi.addToCart(courtAddToCart);
+
+      if (response?.success) {
+        toast.success(response.message, {
+          style: successStyle,
+        });
+        addToCart(courtAddToCart);
+        fetch();
+      } else {
+        toast.error(response.message, {
+          style: errorStyle,
+        });
+      }
+    } catch (error) {
+      toast.error(error.message, {
+        style: errorStyle,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (!mounted) return null;
@@ -111,16 +139,27 @@ export const CalendarBook = ({ court }) => {
                         {item} WIB
                       </SelectItem>
                     ))
-                  : availableTimes.map((time, index) => (
-                      <SelectItem
-                        value={time.time}
-                        key={index}
-                        disabled={time.booked ? true : false}
-                      >
-                        <Clock2Icon />
-                        {time.time} WIB
-                      </SelectItem>
-                    ))}
+                  : timesOptions
+                      .filter(
+                        (item1) =>
+                          !availableTimes.some((item2) => item2.time === item1)
+                      )
+                      .map((time, index) => (
+                        <SelectItem value={time} key={index}>
+                          <Clock2Icon />
+                          {time} WIB
+                        </SelectItem>
+                      ))}
+                {availableTimes?.map((time, index) => (
+                  <SelectItem
+                    value={time.time}
+                    key={index}
+                    disabled={time.booked ? true : false}
+                  >
+                    <Clock2Icon />
+                    {time.time} WIB
+                  </SelectItem>
+                ))}
               </SelectGroup>
             </SelectContent>
           </Select>
@@ -133,7 +172,7 @@ export const CalendarBook = ({ court }) => {
               variant="outline"
               className="w-full bg-main-theme hover:bg-accent hover:text-main-theme dark:bg-input/30 dark:hover:bg-input/50 text-secondary-theme dark:text-constant dark:border cursor-pointer rounded-md py-1 transition-colors duration-300 ease-in-out"
             >
-              <ShoppingCart />
+              {isLoading ? <Spinner /> : <ShoppingCart />}
               Add to cart
             </Button>
           </div>

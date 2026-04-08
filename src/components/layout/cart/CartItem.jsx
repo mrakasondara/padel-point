@@ -1,13 +1,10 @@
 import toRupiah from "@develoka/angka-rupiah-js";
 import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export const CartItem = ({ court }) => {
   return (
@@ -15,36 +12,37 @@ export const CartItem = ({ court }) => {
       <img
         src={court.image_thumb}
         alt="cart-image"
-        className="w-20 max-h-25 rounded-md"
+        className="w-30 max-h-25 rounded-md"
       />
       <div className="flex flex-col w-full">
         <h6 className=" text-[14px] text-main-theme">{court.court_name}</h6>
         <p className=" text-[13px]">{court.address}</p>
         <div className="flex text-[12px] justify-between w-full mt-1 items-center">
-          <Select>
-            <SelectTrigger className="w-full max-w-40 text-[11px]">
-              <SelectValue placeholder="Booked Date" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Booked Date</SelectLabel>
-                {court.selectedDates.map((item) => {
-                  return (
-                    <SelectItem
-                      className="text-[11px]"
-                      value={`${new Date(item.date).toLocaleDateString()}:${
-                        item.time
-                      }`}
-                    >
-                      {new Date(item.date).toLocaleDateString()} : {item.time}{" "}
-                      WIB
-                    </SelectItem>
-                  );
-                })}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-          <p>
+          <Accordion
+            type="single"
+            collapsible
+            defaultValue="cart-bookedDate"
+            className="max-w-lg "
+          >
+            <AccordionItem value="cart-bookedDate">
+              <AccordionTrigger className="text-[11px]">
+                Your booked date ({court.selectedDates.length})
+              </AccordionTrigger>
+              <AccordionContent className="mt-1">
+                <ul className="list-disc">
+                  {court.selectedDates.map((item, index) => {
+                    return (
+                      <li className="text-[11px] list-disc" key={index}>
+                        {new Date(item.date).toLocaleDateString()} : {item.time}{" "}
+                        WIB
+                      </li>
+                    );
+                  })}
+                </ul>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+          <p className="items-start self-start mt-3">
             {toRupiah(court.price * court.selectedDates.length, {
               dot: ",",
               floatingPoint: 0,

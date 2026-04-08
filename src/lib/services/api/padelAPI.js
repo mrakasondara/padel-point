@@ -21,6 +21,18 @@ class PadelApi {
       console.error(error);
     }
   }
+  static async addToCart(court) {
+    try {
+      const response = await fetch(`${baseAPI}/cart`, {
+        method: "PUT",
+        body: JSON.stringify(court),
+      });
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }
 
 export default PadelApi;

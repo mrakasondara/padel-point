@@ -119,7 +119,7 @@ export default function Page() {
             </div>
 
             <div className="grid mt-10 p-3 ">
-              <CalendarBook court={court ?? []} />
+              <CalendarBook court={court ?? []} fetch={fetchDetailCourt} />
             </div>
           </div>
 

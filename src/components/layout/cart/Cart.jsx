@@ -1,5 +1,7 @@
 "use client";
+import { useState } from "react";
 import { ShoppingCart } from "lucide-react";
+import { toast } from "sonner";
 import toRupiah from "@develoka/angka-rupiah-js";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,13 +14,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { toast } from "sonner";
-import { successStyle } from "@/lib/toster-styles";
+import { errorStyle, successStyle } from "@/lib/toster-styles";
 import useStore from "@/lib/services/store";
 import { CartItem } from "./CartItem";
+import PadelApi from "@/lib/services/api/padelAPI";
+import { Spinner } from "@/components/ui/spinner";
 
 export const Cart = () => {
   const { cart, resetCart } = useStore();
+  const [isLoading, setIsLoading] = useState(false);
 
   const mergedCart = cart.reduce((acc, item) => {
     const existCourt = acc.find((court) => court.id == item.id);
@@ -37,12 +41,32 @@ export const Cart = () => {
   }, []);
 
   const totalPrice = cart.reduce((acc, prev) => acc + prev.price, 0);
+
   const onReset = (e) => {
     e.preventDefault();
     resetCart();
     toast.success("Cart been successfully emptied", {
       style: successStyle,
     });
+  };
+
+  const onCheckOut = async (e) => {
+    e.preventDefault();
+    try {
+      setIsLoading(true);
+      const response = await PadelApi.addToCart(cart);
+      if (response?.success) {
+        toast.success(response.message, {
+          style: successStyle,
+        });
+      }
+    } catch (error) {
+      toast.error(error.message, {
+        style: errorStyle,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -85,8 +109,10 @@ export const Cart = () => {
               <Button
                 type="submit"
                 variant="outline"
+                onClick={onCheckOut}
                 className="bg-main-theme hover:bg-secondary-theme  hover:text-main-theme cursor-pointer transition text-constant font-poppins text-[12px]"
               >
+                {isLoading ? <Spinner /> : ""}
                 Check Out
               </Button>
             </div>

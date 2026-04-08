@@ -76,4 +76,57 @@ class adminPadelAPI {
   }
 }
 
+const bookedDates = [
+  {
+    date: "Sat Feb 28 2026 00:00:00 GMT+0700 (Western Indonesia Time)",
+    times: [
+      {
+        time: "08-09",
+        booked: true,
+      },
+      {
+        time: "10-11",
+        booked: true,
+      },
+      {
+        time: "12-13",
+        booked: true,
+      },
+      {
+        time: "14-15",
+        booked: true,
+      },
+      {
+        time: "16-17",
+        booked: true,
+      },
+    ],
+  },
+  {
+    date: "Fri Feb 27 2026 00:00:00 GMT+0700 (Western Indonesia Time)",
+    times: [
+      {
+        time: "08-09",
+        booked: false,
+      },
+      {
+        time: "10-11",
+        booked: true,
+      },
+      {
+        time: "12-13",
+        booked: true,
+      },
+      {
+        time: "14-15",
+        booked: false,
+      },
+      {
+        time: "16-17",
+        booked: false,
+      },
+    ],
+  },
+];
+
 export default adminPadelAPI;
