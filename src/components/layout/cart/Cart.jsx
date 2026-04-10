@@ -22,7 +22,8 @@ import { Spinner } from "@/components/ui/spinner";
 
 export const Cart = () => {
   const { cart, resetCart } = useStore();
-  const [isLoading, setIsLoading] = useState(false);
+  const [checkOutLoading, setCheckOutLoading] = useState(false);
+  const [resetLoading, setResetLoading] = useState(false);
 
   const mergedCart = cart.reduce((acc, item) => {
     const existCourt = acc.find((court) => court.id == item.id);
@@ -42,19 +43,13 @@ export const Cart = () => {
 
   const totalPrice = cart.reduce((acc, prev) => acc + prev.price, 0);
 
-  const onReset = (e) => {
+  const onReset = async (e) => {
     e.preventDefault();
     resetCart();
-    toast.success("Cart been successfully emptied", {
-      style: successStyle,
-    });
-  };
 
-  const onCheckOut = async (e) => {
-    e.preventDefault();
     try {
-      setIsLoading(true);
-      const response = await PadelApi.addToCart(cart);
+      setResetLoading(true);
+      const response = await PadelApi.resetCart(cart);
       if (response?.success) {
         toast.success(response.message, {
           style: successStyle,
@@ -65,7 +60,26 @@ export const Cart = () => {
         style: errorStyle,
       });
     } finally {
-      setIsLoading(false);
+      setResetLoading(false);
+    }
+  };
+
+  const onCheckOut = async (e) => {
+    e.preventDefault();
+    try {
+      setCheckOutLoading(true);
+      const response = await PadelApi.checkOutCart(cart);
+      if (response?.success) {
+        toast.success(response.message, {
+          style: successStyle,
+        });
+      }
+    } catch (error) {
+      toast.error(error.message, {
+        style: errorStyle,
+      });
+    } finally {
+      setCheckOutLoading(false);
     }
   };
 
@@ -103,6 +117,7 @@ export const Cart = () => {
             <div className="flex gap-1 justify-end w-full">
               <DialogClose asChild>
                 <Button variant="outline" onClick={onReset}>
+                  {resetLoading ? <Spinner /> : ""}
                   Reset
                 </Button>
               </DialogClose>
@@ -112,7 +127,7 @@ export const Cart = () => {
                 onClick={onCheckOut}
                 className="bg-main-theme hover:bg-secondary-theme  hover:text-main-theme cursor-pointer transition text-constant font-poppins text-[12px]"
               >
-                {isLoading ? <Spinner /> : ""}
+                {checkOutLoading ? <Spinner /> : ""}
                 Check Out
               </Button>
             </div>

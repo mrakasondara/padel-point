@@ -38,12 +38,6 @@ export const CalendarBook = ({ court, fetch }) => {
 
   const [bookedDates, setBookedDates] = useState(court?.booked_dates ?? []);
 
-  // let fullyBookedDates = new Date(
-  //   bookedDates
-  //     ?.filter((item) => item.times?.every((time) => time.booked == true))
-  //     .map((item) => item.date)
-  // );
-
   let fullyBookedDates = new Date(
     bookedDates
       ?.filter((item) => item.times.length === timesOptions.length)

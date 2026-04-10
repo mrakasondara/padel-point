@@ -3,21 +3,13 @@ import { authCheck } from "@/lib/auth";
 import { NextResponse } from "next/server";
 import { mongoURI } from "../../../../constant";
 import { Court } from "@/database/models/court";
-import { isDate } from "date-fns";
 
 export async function PUT(req) {
-  // const isAuth = await authCheck(req);
-  // if (!isAuth.email) return isAuth;
+  const isAuth = await authCheck(req);
+  if (!isAuth.email) return isAuth;
 
-  // const { email } = isAuth;
+  const { email } = isAuth;
   const court = await req.json();
-
-  // const court = {
-  //   id: "69a25acce547997cd53f5a13",
-  //   selectedDate: "2026-03-28T10:51:14.376Z",
-  //   selectedTime: "17-18",
-  //   booked: true,
-  // };
 
   try {
     await connectDB(mongoURI);
@@ -118,4 +110,48 @@ export async function PUT(req) {
       { status: 400 }
     );
   }
+}
+
+export async function DELETE(req) {
+  const courts = await req.json();
+  try {
+    await connectDB(mongoURI);
+    for (const court of courts) {
+      const target = await Court.findOne(
+        { _id: court.id },
+        {
+          booked_dates: {
+            $elemMatch: { date: new Date(court.selectedDate).toISOString() },
+          },
+        }
+      );
+
+      const bookedDatesData = target.booked_dates[0];
+
+      // get selected time index
+      const index = bookedDatesData.times.findIndex(
+        (item) => item.time === court.selectedTime
+      );
+      bookedDatesData.times.splice(index, 1);
+      await target.save();
+
+      if (!bookedDatesData.times.length) {
+        // get booked_date index
+        const target = await Court.findOne({ _id: court.id });
+        const targetedBookedDates = target.booked_dates;
+        const index = targetedBookedDates.findIndex(
+          (item) => item.date == court.selectedDate
+        );
+        target.booked_dates.splice(index, 1);
+        await target.save();
+      }
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+
+  return NextResponse.json(
+    { success: true, message: "Cart been successfully emptied" },
+    { status: 201 }
+  );
 }

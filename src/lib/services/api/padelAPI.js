@@ -33,6 +33,30 @@ class PadelApi {
       console.error(error);
     }
   }
+  static async checkOutCart(court) {
+    try {
+      const response = await fetch(`${baseAPI}/cart`, {
+        method: "POST",
+        body: JSON.stringify(court),
+      });
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  static async resetCart(court) {
+    try {
+      const response = await fetch(`${baseAPI}/cart`, {
+        method: "DELETE",
+        body: JSON.stringify(court),
+      });
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }
 
 export default PadelApi;
