@@ -8,7 +8,6 @@ export async function PUT(req) {
   const isAuth = await authCheck(req);
   if (!isAuth.email) return isAuth;
 
-  const { email } = isAuth;
   const court = await req.json();
 
   try {
@@ -113,6 +112,9 @@ export async function PUT(req) {
 }
 
 export async function DELETE(req) {
+  const isAuth = await authCheck(req);
+  if (!isAuth.email) return isAuth;
+
   const courts = await req.json();
   try {
     await connectDB(mongoURI);
@@ -147,11 +149,14 @@ export async function DELETE(req) {
       }
     }
   } catch (error) {
-    console.log(error.message);
+    return NextResponse.json(
+      { success: false, message: error.message },
+      { status: 400 }
+    );
   }
 
   return NextResponse.json(
     { success: true, message: "Cart been successfully emptied" },
-    { status: 201 }
+    { status: 200 }
   );
 }

@@ -12,6 +12,10 @@ const useStore = create(
         })),
 
       resetCart: () => set((state) => ({ cart: [] })),
+      removeItemFromCart: (id) =>
+        set((state) => ({
+          cart: state.cart.filter((item) => item.id !== id),
+        })),
     }),
     {
       name: "cart-court",

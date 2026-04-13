@@ -21,9 +21,10 @@ import PadelApi from "@/lib/services/api/padelAPI";
 import { Spinner } from "@/components/ui/spinner";
 
 export const Cart = () => {
-  const { cart, resetCart } = useStore();
+  const { cart, resetCart, removeItemFromCart } = useStore();
   const [checkOutLoading, setCheckOutLoading] = useState(false);
   const [resetLoading, setResetLoading] = useState(false);
+  const [removeLoading, setRemoveLoading] = useState(false);
 
   const mergedCart = cart.reduce((acc, item) => {
     const existCourt = acc.find((court) => court.id == item.id);
@@ -42,6 +43,26 @@ export const Cart = () => {
   }, []);
 
   const totalPrice = cart.reduce((acc, prev) => acc + prev.price, 0);
+
+  const onRemoveItem = async (id) => {
+    const targetCart = cart.filter((item) => item.id === id);
+    try {
+      setRemoveLoading(true);
+      const response = await PadelApi.removeCartItem(targetCart);
+      if (response?.success) {
+        toast.success(response.message, {
+          style: successStyle,
+        });
+        removeItemFromCart(id);
+      }
+    } catch (error) {
+      toast.error(error.message, {
+        style: errorStyle,
+      });
+    } finally {
+      setRemoveLoading(false);
+    }
+  };
 
   const onReset = async (e) => {
     e.preventDefault();
@@ -104,7 +125,14 @@ export const Cart = () => {
           </DialogHeader>
           <div className="flex flex-col gap-2">
             {mergedCart?.map((court) => {
-              return <CartItem court={court} key={court.id} />;
+              return (
+                <CartItem
+                  court={court}
+                  key={court.id}
+                  remove={onRemoveItem}
+                  loading={removeLoading}
+                />
+              );
             })}
           </div>
           <DialogFooter className="flex flex-col md:flex-row items-center">
@@ -116,7 +144,11 @@ export const Cart = () => {
             </p>
             <div className="flex gap-1 justify-end w-full">
               <DialogClose asChild>
-                <Button variant="outline" onClick={onReset}>
+                <Button
+                  variant="outline"
+                  onClick={onReset}
+                  className="cursor-pointer"
+                >
                   {resetLoading ? <Spinner /> : ""}
                   Reset
                 </Button>

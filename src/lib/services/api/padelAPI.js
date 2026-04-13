@@ -57,6 +57,19 @@ class PadelApi {
       console.error(error);
     }
   }
+  static async removeCartItem(court) {
+    try {
+      const id = court[0].id;
+      const response = await fetch(`${baseAPI}/cart/${id}`, {
+        method: "DELETE",
+        body: JSON.stringify(court),
+      });
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }
 
 export default PadelApi;
