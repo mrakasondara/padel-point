@@ -5,8 +5,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 import { CalendarBook } from "@/components/dashboard/court-detail/CalendarBook";
-import { Comments } from "@/components/dashboard/court-detail/Comments";
-import { Spinner } from "@/components/ui/spinner";
+import { Comment } from "@/components/dashboard/court-detail/comment/Comment";
 import { Loading } from "@/components/layout/Loading";
 
 import adminPadelAPI from "@/lib/services/api/adminPadelAPI";
@@ -124,7 +123,7 @@ export default function Page() {
           </div>
 
           <section className="flex flex-col w-full mt-10">
-            <Comments reviews={court?.reviews} />
+            <Comment reviews={court?.reviews} />
           </section>
         </>
       )}

@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { CommentList } from "./CommentList";
 
-export const Comments = ({ reviews }) => {
+export const Comment = ({ reviews }) => {
   return (
     <div className="flex flex-col gap-5">
       <div className="grid w-full gap-3">
@@ -23,6 +24,8 @@ export const Comments = ({ reviews }) => {
           Add Comment
         </Button>
       </div>
+
+      <CommentList />
     </div>
   );
 };
