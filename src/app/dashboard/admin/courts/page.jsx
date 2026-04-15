@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { CourtsDialog } from "@/components/admin/courts/CourtsDialog";
 import { CourtsList } from "@/components/admin/courts/CourtsList";
-import adminPadelAPI from "@/lib/services/api/adminPadelAPI";
 import { errorStyle } from "@/lib/toster-styles";
 import { Loading } from "@/components/layout/Loading";
+import PadelApi from "@/lib/services/api/padelAPI";
 
 export default function Courts() {
   const [courts, setCourts] = useState([]);
@@ -14,7 +14,7 @@ export default function Courts() {
   const fetchCourts = async () => {
     try {
       setIsLoading(true);
-      const response = await adminPadelAPI.getCourts();
+      const response = await PadelApi.getCourts();
       if (response?.success) {
         setCourts(response?.data);
       } else {
