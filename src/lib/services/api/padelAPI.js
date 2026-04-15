@@ -33,11 +33,11 @@ class PadelApi {
       console.error(error);
     }
   }
-  static async checkOutCart(court) {
+  static async checkOutCart(courts) {
     try {
       const response = await fetch(`${baseAPI}/cart`, {
         method: "POST",
-        body: JSON.stringify(court),
+        body: JSON.stringify(courts),
       });
       const data = response.json();
       return data;

@@ -21,8 +21,10 @@ import { toast } from "sonner";
 import { successStyle, warningStyle, errorStyle } from "@/lib/toster-styles";
 import PadelApi from "@/lib/services/api/padelAPI";
 import { Spinner } from "@/components/ui/spinner";
+import { useSession } from "next-auth/react";
 
 export const CalendarBook = ({ court, fetch }) => {
+  const { data } = useSession();
   const { cart, addToCart } = useStore();
 
   const [selectedDate, setSelectedDate] = useState(
@@ -56,6 +58,10 @@ export const CalendarBook = ({ court, fetch }) => {
 
   const onAddToCart = async (e) => {
     e.preventDefault();
+
+    if (!data) {
+      return toast.warning("Login first", { style: warningStyle });
+    }
 
     const courtAddToCart = {
       id: court._id,

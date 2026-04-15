@@ -7,6 +7,17 @@ const bookedDatesSchema = new Schema({
   date: { type: Date, required: true },
   times: [timesSchema],
 });
+const courtSchema = new Schema({
+  _id: {
+    type: Schema.ObjectId,
+    required: {
+      value: true,
+      message: "Court id shouldn't empty",
+    },
+  },
+  booked_dates: [bookedDatesSchema],
+  total_payment: Number,
+});
 
 const transactionSchema = new Schema(
   {
@@ -17,14 +28,7 @@ const transactionSchema = new Schema(
         message: "User id shouldn't empty",
       },
     },
-    court_id: {
-      type: Schema.ObjectId,
-      required: {
-        value: true,
-        message: "Court id shouldn't empty",
-      },
-    },
-    booked_dates: [bookedDatesSchema],
+    courts: [courtSchema],
     total_payment: {
       type: Number,
       required: {

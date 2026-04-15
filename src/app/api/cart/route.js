@@ -3,6 +3,73 @@ import { authCheck } from "@/lib/auth";
 import { NextResponse } from "next/server";
 import { mongoURI } from "../../../../constant";
 import { Court } from "@/database/models/court";
+import { Transaction } from "@/database/models/transaction";
+
+export async function POST(req) {
+  const isAuth = await authCheck(req);
+  if (!isAuth.email) return isAuth;
+
+  const user_id = isAuth.sub;
+
+  const courts = await req.json();
+
+  const newCourts = Object.values(
+    courts.reduce((acc, item) => {
+      const { id, selectedDate, selectedTime, price } = item;
+
+      if (!acc[id]) {
+        acc[id] = {
+          court_id: id,
+          booked_dates: [],
+          total_payment: price,
+        };
+      } else {
+        acc[id].total_payment += price;
+      }
+
+      // console.log(acc[id].price);
+
+      // cek apakah tanggal sudah ada
+      const existingDate = acc[id].booked_dates.find(
+        (court) =>
+          new Date(court.date).toISOString() ===
+          new Date(selectedDate).toISOString()
+      );
+
+      if (existingDate) {
+        existingDate.times.push({ time: selectedTime });
+      } else {
+        acc[id].booked_dates.push({
+          date: new Date(selectedDate).toISOString(),
+          times: [{ time: selectedTime }],
+        });
+      }
+
+      return acc;
+    }, {})
+  );
+
+  const totalPayment = newCourts.reduce(
+    (acc, cur) => acc + cur.total_payment,
+    0
+  );
+
+  const transactionData = {
+    user_id,
+    courts: newCourts,
+    total_payment: totalPayment,
+    payment_status: "paid",
+    transaction_status: "pending",
+  };
+
+  // console.log(transactionData.courts[0].booked_dates);
+  await Transaction.create(transactionData);
+
+  return NextResponse.json(
+    { success: true, message: "Successfully added to Cart" },
+    { status: 201 }
+  );
+}
 
 export async function PUT(req) {
   const isAuth = await authCheck(req);
