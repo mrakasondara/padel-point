@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { model, Schema, models } from "mongoose";
 
 const slotTimesSchema = new Schema({
@@ -9,6 +10,28 @@ const bookedDatesSchema = new Schema({
   date: { type: Date, required: true },
   times: [slotTimesSchema],
 });
+
+const commentsSchema = new Schema(
+  {
+    user_id: {
+      type: ObjectId,
+      required: {
+        value: true,
+        message: "User id shouldn`t empty ",
+      },
+    },
+    comment: {
+      type: String,
+      required: {
+        value: true,
+        message: "Comment shouldn`t empty ",
+      },
+    },
+    like: { type: Number },
+    dislike: { type: Number },
+  },
+  { timestamps: true }
+);
 
 const courtSchema = new Schema({
   court_name: {
@@ -59,18 +82,7 @@ const courtSchema = new Schema({
     type: String,
   },
   booked_dates: [bookedDatesSchema],
+  comments: [commentsSchema],
 });
 
 export const Court = models.Courts || model("Courts", courtSchema);
-
-booked_dates: [
-  {
-    date: "09-11-2025",
-    times: [
-      {
-        time: "10-11",
-        booked: true,
-      },
-    ],
-  },
-];

@@ -21,6 +21,36 @@ class PadelApi {
       console.error(error);
     }
   }
+  static async getDetailCourt(id) {
+    try {
+      const response = await fetch(`${baseAPI}/courts/${id}`);
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  static async getComments(id) {
+    try {
+      const response = await fetch(`${baseAPI}/courts/${id}/comments`);
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  static async addComment({ id, comment }) {
+    try {
+      const response = await fetch(`${baseAPI}/courts/${id}/comments`, {
+        method: "POST",
+        body: JSON.stringify(comment),
+      });
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
   static async addToCart(court) {
     try {
       const response = await fetch(`${baseAPI}/cart`, {

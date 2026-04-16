@@ -8,7 +8,7 @@ export async function GET(req, { params }) {
   const { id } = await params;
   try {
     await connectDB(mongoURI);
-    let court = await Court.findById(id);
+    let court = await Court.findById(id, "-comments");
 
     const { data, error } = await getCourtImage(court.image_thumb);
 

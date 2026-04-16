@@ -1,11 +1,13 @@
 import { CommentItem } from "./CommentItem";
 
-export const CommentList = () => {
+export const CommentList = ({ comments }) => {
+  console.log(comments);
   return (
     <div className="flex flex-col gap-3">
-      <CommentItem />
-      <CommentItem />
-      <CommentItem />
+      {comments.length &&
+        comments.map((comment, index) => {
+          return <CommentItem {...comment} key={index} />;
+        })}
     </div>
   );
 };

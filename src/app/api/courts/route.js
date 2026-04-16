@@ -60,7 +60,7 @@ export async function GET(req) {
   try {
     await connectDB(mongoURI);
 
-    let courts = await Court.find({}, "-description -reviews -facilities");
+    let courts = await Court.find({}, "-description -comments -facilities");
 
     for (const court of courts) {
       const { data, error } = await getCourtImage(court.image_thumb);

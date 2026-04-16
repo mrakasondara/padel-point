@@ -8,19 +8,21 @@ import { CalendarBook } from "@/components/dashboard/court-detail/CalendarBook";
 import { Comment } from "@/components/dashboard/court-detail/comment/Comment";
 import { Loading } from "@/components/layout/Loading";
 
-import adminPadelAPI from "@/lib/services/api/adminPadelAPI";
 import { facilityItems } from "@/lib/facilities";
 import { errorStyle } from "@/lib/toster-styles";
+import PadelApi from "@/lib/services/api/padelAPI";
 
 export default function Page() {
   const { id } = useParams();
   const [court, setCourt] = useState({});
+  const [comments, setComments] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [commentLoading, setCommentLoading] = useState(false);
 
   const fetchDetailCourt = async () => {
     try {
       setIsLoading(true);
-      const response = await adminPadelAPI.getDetailCourt(id);
+      const response = await PadelApi.getDetailCourt(id);
       if (response?.success) {
         setCourt(response.data);
       } else {
@@ -33,8 +35,25 @@ export default function Page() {
     }
   };
 
+  const fetchCommentsCourt = async () => {
+    try {
+      setCommentLoading(true);
+      const response = await PadelApi.getComments(id);
+      if (response?.success) {
+        setComments(response.data);
+      } else {
+        toast.error(response.message, { style: errorStyle });
+      }
+    } catch (error) {
+      toast.error(error.message, { style: errorStyle });
+    } finally {
+      setCommentLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchDetailCourt();
+    fetchCommentsCourt();
   }, []);
 
   return (
@@ -75,9 +94,9 @@ export default function Page() {
                   </div>
                   <p>
                     <span className="font-semibold">
-                      {court?.reviews ?? "-"}
+                      {comments?.length ?? "-"}
                     </span>{" "}
-                    Reviews
+                    Comments
                   </p>
                 </div>
               </section>
@@ -123,7 +142,11 @@ export default function Page() {
           </div>
 
           <section className="flex flex-col w-full mt-10">
-            <Comment reviews={court?.reviews} />
+            {commentLoading ? (
+              <Loading message="Loading Comments..." />
+            ) : (
+              <Comment id={id} comments={comments} fetch={fetchCommentsCourt} />
+            )}
           </section>
         </>
       )}
