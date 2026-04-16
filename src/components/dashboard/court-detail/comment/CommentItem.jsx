@@ -4,6 +4,8 @@ import TimeAgo from "javascript-time-ago";
 import { ThumbsDown, ThumbsUp } from "lucide-react";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { useSession } from "next-auth/react";
 
 export const CommentItem = ({
   fullName,
@@ -11,8 +13,10 @@ export const CommentItem = ({
   comment,
   liked,
   disliked,
+  email,
 }) => {
   const timeAgo = new TimeAgo("en");
+  const { data } = useSession();
 
   return (
     <div className="flex flex-col p-3 border-b-2">
@@ -20,12 +24,24 @@ export const CommentItem = ({
         <Avatar size="md">
           <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
         </Avatar>
+
         <h6 className="font-semibold text-main-theme">
           {fullName} <span className="ml-2">•</span>
         </h6>
+
         <span className="text-slate-400 text-[11px]">
           {timeAgo.format(new Date(createdAt), "twitter")}
         </span>
+
+        {data?.user.email === email && (
+          <Button
+            variant="outline"
+            size="xs"
+            className="ml-auto hover:bg-red-500/90 text-red-500/90 dark:hover:text-constant cursor-pointer transition hover:text-constant font-poppins text-[12px]"
+          >
+            Remove Comment
+          </Button>
+        )}
       </div>
       <p className="text-[14px] mt-3 dark:text-white/60 ">{comment}</p>
       <div className="flex mt-2 gap-2">

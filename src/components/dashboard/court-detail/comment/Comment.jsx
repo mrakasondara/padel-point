@@ -5,15 +5,23 @@ import { Textarea } from "@/components/ui/textarea";
 import { CommentList } from "./CommentList";
 import PadelApi from "@/lib/services/api/padelAPI";
 import { toast } from "sonner";
-import { errorStyle, successStyle } from "@/lib/toster-styles";
+import { errorStyle, successStyle, warningStyle } from "@/lib/toster-styles";
 import { Spinner } from "@/components/ui/spinner";
+import { useSession } from "next-auth/react";
 
 export const Comment = ({ id, comments, fetch }) => {
+  const { data } = useSession();
+
   const [comment, setComment] = useState("");
   const [commentLoading, setCommentLoading] = useState(false);
 
   const onAddComment = async (e) => {
     e.preventDefault();
+
+    if (!data)
+      return toast.warning("Login first to add comment!", {
+        style: warningStyle,
+      });
 
     try {
       setCommentLoading(true);
@@ -45,6 +53,7 @@ export const Comment = ({ id, comments, fetch }) => {
           rows="5"
           value={comment}
           onChange={(e) => setComment(e.target.value)}
+          required
         />
         <Button
           variant="outline"
