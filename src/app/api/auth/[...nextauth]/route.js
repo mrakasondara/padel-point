@@ -37,7 +37,9 @@ export const authOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
+        const userData = await User.findOne({ email: user.email });
         token.email = user.email;
+        token.fullName = userData.full_name ?? "";
       }
 
       if (!token.role && token.email) {
@@ -51,6 +53,7 @@ export const authOptions = {
       if (token) {
         session.user.email = token.email;
         session.user.role = token.role;
+        session.user.fullName = token.fullName;
       }
       return session;
     },

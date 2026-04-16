@@ -35,37 +35,20 @@ export const Header = () => {
           ""
         )}
 
-        {activePath == "/" && data ? (
-          <Link href="/dashboard">
-            <Button
-              variant="outline"
-              className="bg-main-theme hover:bg-secondary-theme hover:text-main-theme cursor-pointer transition text-constant font-poppins text-[12px]"
-              size="sm"
-            >
-              Dashboard
-            </Button>
-          </Link>
-        ) : (
-          ""
-        )}
-
-        {activePath.startsWith("/court") && data ? (
-          <Link href="/dashboard">
-            <Button
-              variant="outline"
-              className="bg-main-theme hover:bg-secondary-theme hover:text-main-theme cursor-pointer transition text-constant font-poppins text-[12px]"
-              size="sm"
-            >
-              Dashboard
-            </Button>
-          </Link>
-        ) : (
-          ""
-        )}
-
         {data ? (
           <>
             {data.user.role == "user" && <Cart />}
+
+            <Link href="/dashboard">
+              <Button
+                variant="outline"
+                className="bg-main-theme hover:bg-secondary-theme hover:text-main-theme cursor-pointer transition text-constant font-poppins text-[12px]"
+                size="sm"
+              >
+                Dashboard
+              </Button>
+            </Link>
+
             <Button
               variant="outline"
               className="bg-red-500/90 hover:bg-secondary-theme hover:text-red-500/90 dark:hover:text-constant cursor-pointer transition text-constant font-poppins text-[12px]"

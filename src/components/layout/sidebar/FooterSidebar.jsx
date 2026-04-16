@@ -20,7 +20,7 @@ export const FooterSidebar = ({ data }) => {
               <AvatarBadge className="bg-green-600 dark:bg-green-800" />
             </Avatar>
             <div className="flex flex-col text-main-theme font-poppins">
-              <h6>Anonim</h6>
+              <h6>{data?.user.fullName}</h6>
               <span className="text-[11.8px] text-black dark:text-constant">
                 {data?.user.email}
               </span>

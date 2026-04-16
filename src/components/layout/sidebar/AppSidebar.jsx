@@ -15,7 +15,7 @@ export const AppSidebar = () => {
         <Icon color="main" />
       </SidebarHeader>
       <ContentSidebar data={data} />
-      <FooterSidebar data={data} />
+      {data && <FooterSidebar data={data} />}
     </Sidebar>
   );
 };
