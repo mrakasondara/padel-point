@@ -24,10 +24,10 @@ export const ContentSidebar = ({ data }) => {
     <SidebarContent className="bg-sidebar px-5 list-none font-itim">
       <SidebarGroup>
         <SidebarMenuItem>
-          <Link href={"/dashboard"}>
+          <Link href={"/"}>
             <SidebarMenuButton
               className={`gap-5 text-md lg:text-lg ${
-                activePath == "/dashboard"
+                activePath == "/"
                   ? "dark:bg-accent bg-main-theme/70 text-white"
                   : ""
               }`}
@@ -37,22 +37,53 @@ export const ContentSidebar = ({ data }) => {
           </Link>
         </SidebarMenuItem>
       </SidebarGroup>
+
       <SidebarGroup>
         <SidebarMenuItem>
-          <SidebarMenuButton
-            className={`gap-5 text-md lg:text-lg ${
-              activePath == "/dashboard/search"
-                ? "dark:bg-accent bg-main-theme/70 text-white"
-                : ""
-            }`}
-          >
-            <Search /> Search
-          </SidebarMenuButton>
+          <Link href="/courts">
+            <SidebarMenuButton
+              className={`gap-5 text-md lg:text-lg ${
+                activePath == "/courts"
+                  ? "dark:bg-accent bg-main-theme/70 text-white"
+                  : ""
+              }`}
+            >
+              <List /> Courts
+            </SidebarMenuButton>
+          </Link>
         </SidebarMenuItem>
       </SidebarGroup>
 
       {data?.user.role == "user" ? (
         <>
+          <SidebarGroup>
+            <SidebarMenuItem>
+              <Link href={"/dashboard"}>
+                <SidebarMenuButton
+                  className={`gap-5 text-md lg:text-lg ${
+                    activePath == "/dashboard"
+                      ? "dark:bg-accent bg-main-theme/70 text-white"
+                      : ""
+                  }`}
+                >
+                  <House /> Home
+                </SidebarMenuButton>
+              </Link>
+            </SidebarMenuItem>
+          </SidebarGroup>
+          <SidebarGroup>
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                className={`gap-5 text-md lg:text-lg ${
+                  activePath == "/dashboard/search"
+                    ? "dark:bg-accent bg-main-theme/70 text-white"
+                    : ""
+                }`}
+              >
+                <Search /> Search
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarGroup>
           <SidebarGroup>
             <SidebarMenuItem>
               <SidebarMenuButton
@@ -83,39 +114,41 @@ export const ContentSidebar = ({ data }) => {
       ) : (
         <>
           {data?.user.role == "superadmin" ? (
-            <SidebarGroup>
-              <SidebarMenuItem>
-                <Link href="/dashboard/admin/users">
-                  <SidebarMenuButton
-                    className={`gap-5 text-md lg:text-lg ${
-                      activePath == "/dashboard/admin/users"
-                        ? "dark:bg-accent bg-main-theme/70 text-white"
-                        : ""
-                    }`}
-                  >
-                    <Users /> Users
-                  </SidebarMenuButton>
-                </Link>
-              </SidebarMenuItem>
-            </SidebarGroup>
+            <>
+              <SidebarGroup>
+                <SidebarMenuItem>
+                  <Link href="/dashboard/admin/users">
+                    <SidebarMenuButton
+                      className={`gap-5 text-md lg:text-lg ${
+                        activePath == "/dashboard/admin/users"
+                          ? "dark:bg-accent bg-main-theme/70 text-white"
+                          : ""
+                      }`}
+                    >
+                      <Users /> Users
+                    </SidebarMenuButton>
+                  </Link>
+                </SidebarMenuItem>
+              </SidebarGroup>
+              <SidebarGroup>
+                <SidebarMenuItem>
+                  <Link href="/dashboard/admin/courts">
+                    <SidebarMenuButton
+                      className={`gap-5 text-md lg:text-lg ${
+                        activePath == "/dashboard/admin/courts"
+                          ? "dark:bg-accent bg-main-theme/70 text-white"
+                          : ""
+                      }`}
+                    >
+                      <List /> Courts
+                    </SidebarMenuButton>
+                  </Link>
+                </SidebarMenuItem>
+              </SidebarGroup>
+            </>
           ) : (
             ""
           )}
-          <SidebarGroup>
-            <SidebarMenuItem>
-              <Link href="/dashboard/admin/courts">
-                <SidebarMenuButton
-                  className={`gap-5 text-md lg:text-lg ${
-                    activePath == "/dashboard/admin/courts"
-                      ? "dark:bg-accent bg-main-theme/70 text-white"
-                      : ""
-                  }`}
-                >
-                  <List /> Courts
-                </SidebarMenuButton>
-              </Link>
-            </SidebarMenuItem>
-          </SidebarGroup>
         </>
       )}
     </SidebarContent>

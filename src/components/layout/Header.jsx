@@ -22,15 +22,27 @@ export const Header = () => {
         <ToggleTheme id="toggle-landing" />
 
         {!data ? (
-          <Link href="/signin">
-            <Button
-              variant="outline"
-              className="bg-main-theme hover:bg-secondary-theme hover:text-main-theme cursor-pointer transition text-constant font-poppins text-[12px]"
-              size="sm"
-            >
-              Sign In
-            </Button>
-          </Link>
+          <>
+            <Link href="/court">
+              <Button
+                variant="outline"
+                className="bg-main-theme hover:bg-secondary-theme hover:text-main-theme cursor-pointer transition text-constant font-poppins text-[12px]"
+                size="sm"
+              >
+                Explore Courts
+              </Button>
+            </Link>
+
+            <Link href="/signin">
+              <Button
+                variant="outline"
+                className="bg-main-theme hover:bg-secondary-theme hover:text-main-theme cursor-pointer transition text-constant font-poppins text-[12px]"
+                size="sm"
+              >
+                Sign In
+              </Button>
+            </Link>
+          </>
         ) : (
           ""
         )}
