@@ -8,6 +8,8 @@ import {
   DropdownMenuItem,
   DropdownMenuContent,
 } from "@/components/ui/dropdown-menu";
+import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 export const FooterSidebar = ({ data }) => {
   return (
@@ -29,13 +31,15 @@ export const FooterSidebar = ({ data }) => {
           </SidebarMenuButton>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-[--radix-popper-anchor-width]">
-          <DropdownMenuItem className="flex cursor-pointer">
-            <User />
-            <span>Profile</span>
-          </DropdownMenuItem>
+          <Link href={"/dashboard/profile"}>
+            <DropdownMenuItem className="flex cursor-pointer">
+              <User />
+              <span>Profile</span>
+            </DropdownMenuItem>
+          </Link>
           <DropdownMenuItem className="flex cursor-pointer">
             <LogOut />
-            <span>Logout</span>
+            <span onClick={() => signOut()}>Logout</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
