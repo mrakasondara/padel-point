@@ -1,9 +1,9 @@
-
-# 🏓  PadelPoint
+# 🏓 PadelPoint
 
 PadelPoint adalah aplikasi booking lapangan padel berbasis web yang memungkinkan pengguna untuk melihat ketersediaan lapangan, melakukan reservasi, serta mengelola transaksi dengan mudah.
 
 ## 🚀 Fitur Utama
+
 <ul>
   <li>🔍 Melihat daftar lapangan padel</li>
   <li>📅 Booking lapangan berdasarkan tanggal & waktu</li>
@@ -14,7 +14,9 @@ PadelPoint adalah aplikasi booking lapangan padel berbasis web yang memungkinkan
 </ul>
 
 ## 🛠️ Tech Stack
+
 Frontend :
+
 <ul>
 <li> Next.js </li>
 <li> React.js </li>
@@ -33,6 +35,7 @@ Lainnya :
 </ul>
 
 ## 👨‍💻 Author
+
 <ul>
 <li> Nama : Muhammad Raka Sondara - mrakasondara </li>
 <li> Github : https://github.com/mrakasondara </li>
