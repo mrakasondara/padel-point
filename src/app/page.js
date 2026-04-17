@@ -1,6 +1,6 @@
 import { Hero } from "@/components/landing-page/Hero";
-import { Higlight } from "@/components/landing-page/Highlight";
-import { Explore } from "@/components/landing-page/Explore";
+import { Higlight } from "@/components/landing-page/highlight/Highlight";
+import { Explore } from "@/components/landing-page/explore/Explore";
 import { Reviews } from "@/components/landing-page/Reviews";
 
 export default function LandingPage() {
