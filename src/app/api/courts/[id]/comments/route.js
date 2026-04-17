@@ -18,7 +18,7 @@ export async function POST(req, { params }) {
 
     const comment = await req.json();
 
-    const court = await Court.updateOne(
+    await Court.updateOne(
       { _id: id },
       {
         $push: {
@@ -47,17 +47,24 @@ export async function POST(req, { params }) {
     );
   }
 }
+
 export async function GET(req, { params }) {
   const { id } = await params;
 
   try {
     await connectDB(mongoURI);
 
-    const { comments } = await Court.findById(id, "comments");
+    const { comments } = await Court.findById(id, "comments").sort({
+      createdAt: "desc",
+    });
+
+    const sortedComment = comments.sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
 
     const commentsWithProfile = [];
 
-    for (const comment of comments) {
+    for (const comment of sortedComment) {
       const userProfile = await User.findById(comment.user_id);
 
       commentsWithProfile.push({
