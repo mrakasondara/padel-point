@@ -51,6 +51,48 @@ class PadelApi {
       console.error(error);
     }
   }
+  static async deleteComment({ courtId, commentId }) {
+    try {
+      const response = await fetch(
+        `${baseAPI}/courts/${courtId}/comments/${commentId}`,
+        {
+          method: "DELETE",
+        }
+      );
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  static async likeComment({ courtId, commentId }) {
+    try {
+      const response = await fetch(
+        `${baseAPI}/courts/${courtId}/comments/${commentId}/like`,
+        {
+          method: "PUT",
+        }
+      );
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  static async dislikeComment({ courtId, commentId }) {
+    try {
+      const response = await fetch(
+        `${baseAPI}/courts/${courtId}/comments/${commentId}/dislike`,
+        {
+          method: "PUT",
+        }
+      );
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
   static async addToCart(court) {
     try {
       const response = await fetch(`${baseAPI}/cart`, {

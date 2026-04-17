@@ -65,7 +65,7 @@ export const Comment = ({ id, comments, fetch }) => {
         </Button>
       </form>
 
-      <CommentList comments={comments} />
+      <CommentList courtId={id} comments={comments} fetch={fetch} />
     </div>
   );
 };

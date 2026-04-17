@@ -11,6 +11,22 @@ const bookedDatesSchema = new Schema({
   times: [slotTimesSchema],
 });
 
+const likesSchema = new Schema(
+  {
+    user_id: { type: ObjectId, required: true },
+    email: { type: String, required: true },
+  },
+  { timestamps: true }
+);
+
+const dislikesSchema = new Schema(
+  {
+    user_id: { type: ObjectId, required: true },
+    email: { type: String, required: true },
+  },
+  { timestamps: true }
+);
+
 const commentsSchema = new Schema(
   {
     user_id: {
@@ -27,8 +43,8 @@ const commentsSchema = new Schema(
         message: "Comment shouldn`t empty ",
       },
     },
-    like: { type: Number },
-    dislike: { type: Number },
+    likes: [likesSchema],
+    dislikes: [dislikesSchema],
   },
   { timestamps: true }
 );

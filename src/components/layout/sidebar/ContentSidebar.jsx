@@ -58,21 +58,6 @@ export const ContentSidebar = ({ data }) => {
         <>
           <SidebarGroup>
             <SidebarMenuItem>
-              <Link href={"/dashboard"}>
-                <SidebarMenuButton
-                  className={`gap-5 text-md lg:text-lg ${
-                    activePath == "/dashboard"
-                      ? "dark:bg-accent bg-main-theme/70 text-white"
-                      : ""
-                  }`}
-                >
-                  <House /> Home
-                </SidebarMenuButton>
-              </Link>
-            </SidebarMenuItem>
-          </SidebarGroup>
-          <SidebarGroup>
-            <SidebarMenuItem>
               <SidebarMenuButton
                 className={`gap-5 text-md lg:text-lg ${
                   activePath == "/dashboard/search"

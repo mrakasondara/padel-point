@@ -27,8 +27,6 @@ export async function POST(req) {
         acc[id].total_payment += price;
       }
 
-      // console.log(acc[id].price);
-
       // cek apakah tanggal sudah ada
       const existingDate = acc[id].booked_dates.find(
         (court) =>
@@ -62,7 +60,6 @@ export async function POST(req) {
     transaction_status: "pending",
   };
 
-  // console.log(transactionData.courts[0].booked_dates);
   await Transaction.create(transactionData);
 
   return NextResponse.json(
