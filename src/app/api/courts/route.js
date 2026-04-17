@@ -57,10 +57,16 @@ export async function POST(req) {
 }
 
 export async function GET(req) {
+  const searchParams = req.nextUrl.searchParams;
+  const limit = searchParams.get("limit") || 0;
+
   try {
     await connectDB(mongoURI);
 
-    let courts = await Court.find({}, "-description -comments -facilities");
+    let courts = await Court.find(
+      {},
+      "-description -comments -facilities"
+    ).limit(limit);
 
     for (const court of courts) {
       const { data, error } = await getCourtImage(court.image_thumb);

@@ -12,9 +12,11 @@ class PadelApi {
       console.error(error);
     }
   }
-  static async getCourts() {
+  static async getCourts(limit) {
     try {
-      const response = await fetch(`${baseAPI}/courts`);
+      const response = await fetch(
+        `${baseAPI}/courts${limit ? `?limit=${limit}` : ""}`
+      );
       const data = response.json();
       return data;
     } catch (error) {
