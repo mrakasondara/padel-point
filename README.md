@@ -10,7 +10,7 @@ PadelPoint adalah aplikasi booking lapangan padel berbasis web yang memungkinkan
   <li>❤️ Like & komentar pada lapangan</li>
   <li>🧾 Riwayat transaksi pengguna</li>
   <li>🔐 Autentikasi (Login & Register)</li>
-  <li>📊 Dashboard admin (opsional)</li>
+  <li>📊 Dashboard admin</li>
 </ul>
 
 ## 🛠️ Tech Stack
