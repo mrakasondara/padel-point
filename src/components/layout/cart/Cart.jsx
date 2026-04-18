@@ -19,6 +19,7 @@ import useStore from "@/lib/services/store";
 import { CartItem } from "./CartItem";
 import PadelApi from "@/lib/services/api/padelAPI";
 import { Spinner } from "@/components/ui/spinner";
+import { Avatar, AvatarBadge } from "@/components/ui/avatar";
 
 export const Cart = () => {
   const { cart, resetCart, removeItemFromCart } = useStore();
@@ -109,11 +110,14 @@ export const Cart = () => {
       <form>
         <DialogTrigger asChild>
           <Button
-            variant="outline"
-            className="bg-main-theme/90 hover:bg-secondary-theme hover:text-main-theme/90 dark:hover:text-constant cursor-pointer transition text-constant font-poppins text-[12px]"
+            variant="transparent"
+            className="relative hover:text-main-theme/90 cursor-pointer"
             size="sm"
           >
             <ShoppingCart />
+            <span className="absolute right-1 text-[12px] font-semibold text-main-theme rounded-full -top-1 z-50">
+              {mergedCart?.length}
+            </span>
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px] md:max-w-[600px]">
