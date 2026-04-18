@@ -115,7 +115,11 @@ export const Cart = () => {
             size="sm"
           >
             <ShoppingCart />
-            <span className="absolute right-1 text-[12px] font-semibold text-main-theme rounded-full -top-1 z-50">
+            <span
+              className={`absolute ${
+                mergedCart?.length ? "inline" : "hidden"
+              } right-1 text-[12px] font-semibold text-main-theme rounded-full -top-1 z-50`}
+            >
               {mergedCart?.length}
             </span>
           </Button>
