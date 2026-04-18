@@ -3,8 +3,8 @@ import { MapPinned, Star } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
-import { CalendarBook } from "@/components/dashboard/court-detail/CalendarBook";
-import { Comment } from "@/components/dashboard/court-detail/comment/Comment";
+import { CalendarBook } from "@/components/courts/court-detail/CalendarBook";
+import { Comment } from "@/components/courts/court-detail/comment/Comment";
 import { Loading } from "@/components/layout/Loading";
 
 import { facilityItems } from "@/lib/facilities";

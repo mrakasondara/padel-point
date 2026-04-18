@@ -1,4 +1,4 @@
-import { CourtDetail } from "@/components/dashboard/court-detail/CourtDetail";
+import { CourtDetail } from "@/components/courts/court-detail/CourtDetail";
 import { getCourtTitle } from "@/database";
 
 export async function generateMetadata({ params }) {

@@ -1,4 +1,4 @@
-import { CourtsGrid } from "@/components/dashboard/explore-courts/CourtsGrid";
+import { CourtsGrid } from "@/components/courts/explore-courts/CourtsGrid";
 
 export const metadata = {
   title: "Explore Courts",
