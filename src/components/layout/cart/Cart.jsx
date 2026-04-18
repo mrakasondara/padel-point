@@ -19,7 +19,6 @@ import useStore from "@/lib/services/store";
 import { CartItem } from "./CartItem";
 import PadelApi from "@/lib/services/api/padelAPI";
 import { Spinner } from "@/components/ui/spinner";
-import { Avatar, AvatarBadge } from "@/components/ui/avatar";
 
 export const Cart = () => {
   const { cart, resetCart, removeItemFromCart } = useStore();

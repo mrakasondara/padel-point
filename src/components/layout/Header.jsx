@@ -4,7 +4,6 @@ import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Icon } from "./Icon";
-import { ToggleTheme } from "./ToggleTheme";
 import { Cart } from "./cart/Cart";
 
 export const Header = () => {
@@ -19,8 +18,6 @@ export const Header = () => {
     >
       <Icon id="icon-landing" />
       <div className="flex items-center ml-auto gap-2">
-        <ToggleTheme id="toggle-landing" />
-
         {!data ? (
           <>
             <Link href="/court">

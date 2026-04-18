@@ -10,10 +10,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
+import { ToggleTheme } from "../ToggleTheme";
 
 export const FooterSidebar = ({ data }) => {
   return (
     <SidebarFooter className="bg-sidebar px-5 mb-3">
+      <ToggleTheme id="toggle-landing" />
+
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <SidebarMenuButton className="py-7">
