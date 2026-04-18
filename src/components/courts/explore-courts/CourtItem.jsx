@@ -1,7 +1,14 @@
-import { Star, MapPinned } from "lucide-react";
+import { Star, MapPinned, EllipsisVertical } from "lucide-react";
 import toRupiah from "@develoka/angka-rupiah-js";
 
 import Link from "next/link";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
 
 export const CourtItem = ({
   _id,
@@ -39,6 +46,22 @@ export const CourtItem = ({
           <span className="flex items-center gap-1 bg-white/30 backdrop-blur-sm px-3 rounded-lg">
             {toRupiah(price, { useUnit: true, floatingPoint: 0 })}/hour
           </span>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="outline"
+                size="xs"
+                className="bg-white/30 hover:bg-white/60 backdrop-blur-sm border-0 cursor-pointer"
+              >
+                <EllipsisVertical />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="p-0">
+              <DropdownMenuItem className="text-[12px] cursor-pointer">
+                Add to favorite
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </div>
