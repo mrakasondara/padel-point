@@ -40,10 +40,10 @@ export const ContentSidebar = ({ data }) => {
 
       <SidebarGroup>
         <SidebarMenuItem>
-          <Link href="/courts">
+          <Link href="/court">
             <SidebarMenuButton
               className={`gap-5 text-md lg:text-lg ${
-                activePath == "/courts"
+                activePath == "/court"
                   ? "dark:bg-accent bg-main-theme/70 text-white"
                   : ""
               }`}
