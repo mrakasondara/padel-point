@@ -1,5 +1,4 @@
 "use client";
-import { useParams } from "next/navigation";
 import { MapPinned, Star } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -13,7 +12,6 @@ import { errorStyle } from "@/lib/toster-styles";
 import PadelApi from "@/lib/services/api/padelAPI";
 
 export const CourtDetail = ({ id }) => {
-  //   const { id } = useParams();
   const [court, setCourt] = useState({});
   const [comments, setComments] = useState({});
   const [isLoading, setIsLoading] = useState(false);
