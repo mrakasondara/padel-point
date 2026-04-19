@@ -1,5 +1,6 @@
 const baseAPI = process.env.NEXT_PUBLIC_BASE_API;
 class PadelApi {
+  // auth api
   static async register(userData) {
     try {
       const response = await fetch(`${baseAPI}/register`, {
@@ -12,6 +13,8 @@ class PadelApi {
       console.error(error);
     }
   }
+
+  // courts api
   static async getCourts(limit) {
     try {
       const response = await fetch(
@@ -32,6 +35,15 @@ class PadelApi {
       console.error(error);
     }
   }
+  static async getFavoriteCourts() {
+    try {
+      const response = await fetch(`${baseAPI}/courts/favorites`);
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
   static async addToFavorite({ id, court_name }) {
     try {
       const response = await fetch(`${baseAPI}/courts/${id}/favorite`, {
@@ -44,6 +56,8 @@ class PadelApi {
       console.error(error);
     }
   }
+
+  // comment court api
   static async getComments(id) {
     try {
       const response = await fetch(`${baseAPI}/courts/${id}/comments`);
@@ -107,6 +121,8 @@ class PadelApi {
       console.error(error);
     }
   }
+
+  // cart api
   static async addToCart(court) {
     try {
       const response = await fetch(`${baseAPI}/cart`, {
