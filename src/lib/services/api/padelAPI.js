@@ -32,6 +32,18 @@ class PadelApi {
       console.error(error);
     }
   }
+  static async addToFavorite({ id, court_name }) {
+    try {
+      const response = await fetch(`${baseAPI}/courts/${id}/favorite`, {
+        method: "POST",
+        body: JSON.stringify(court_name),
+      });
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
   static async getComments(id) {
     try {
       const response = await fetch(`${baseAPI}/courts/${id}/comments`);

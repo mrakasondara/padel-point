@@ -1,4 +1,10 @@
+import { ObjectId } from "mongodb";
 import { model, Schema, models } from "mongoose";
+
+const favoriteCourtsSchema = new Schema({
+  court_id: { type: ObjectId, required: true },
+  court_name: { type: String, required: true },
+});
 
 const userSchema = new Schema(
   {
@@ -32,6 +38,7 @@ const userSchema = new Schema(
     image_thumb: {
       type: String,
     },
+    favorite_courts: [favoriteCourtsSchema],
   },
   { timestamps: true }
 );

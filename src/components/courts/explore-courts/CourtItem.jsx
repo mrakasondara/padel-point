@@ -1,3 +1,4 @@
+"use client";
 import { Star, MapPinned, EllipsisVertical } from "lucide-react";
 import toRupiah from "@develoka/angka-rupiah-js";
 
@@ -9,6 +10,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { Spinner } from "@/components/ui/spinner";
+import PadelApi from "@/lib/services/api/padelAPI";
+import { toast } from "sonner";
+import { errorStyle, successStyle } from "@/lib/toster-styles";
 
 export const CourtItem = ({
   _id,
@@ -18,8 +24,26 @@ export const CourtItem = ({
   price,
   image_thumb,
 }) => {
+  const [loading, setLoading] = useState(false);
+
+  const onAddFavorite = async () => {
+    try {
+      setLoading(true);
+      const response = await PadelApi.addToFavorite({ id: _id, court_name });
+      if (response?.success) {
+        toast.success(response.message, { style: successStyle });
+      } else {
+        toast.error(response.message, { style: errorStyle });
+      }
+    } catch (error) {
+      toast.error(error.message, { style: errorStyle });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="rounded-lg flex flex-col justify-end relative h-[250px] md:h-[280px] lg:h-[300px] overflow-hidden">
+    <div className="rounded-lg flex flex-col justify-end relative h-62.5 md:h-70 lg:h-75 overflow-hidden">
       <img
         src={image_thumb}
         alt={city}
@@ -53,11 +77,14 @@ export const CourtItem = ({
                 size="xs"
                 className="bg-white/30 hover:bg-white/60 backdrop-blur-sm border-0 cursor-pointer"
               >
-                <EllipsisVertical />
+                {loading ? <Spinner /> : <EllipsisVertical />}
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="p-0">
-              <DropdownMenuItem className="text-[12px] cursor-pointer">
+              <DropdownMenuItem
+                className="text-[12px] cursor-pointer"
+                onClick={onAddFavorite}
+              >
                 Add to favorite
               </DropdownMenuItem>
             </DropdownMenuContent>
