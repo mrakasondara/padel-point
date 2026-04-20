@@ -5,18 +5,18 @@ import { toast } from "sonner";
 
 import { FavoriteItem } from "./FavoriteItem";
 import { errorStyle } from "@/lib/toster-styles";
-import { Loading } from "../layout/Loading";
+import { FavoriteSkeleton } from "./FavoriteSkeleton";
 
 export const FavoriteList = () => {
   const [loading, setLoading] = useState(false);
-  const [courts, setCourts] = useState({});
+  const [favoriteCourts, setFavoriteCourts] = useState({});
 
   const fetchFavorites = async () => {
     try {
       setLoading(true);
       const response = await PadelApi.getFavoriteCourts();
       if (response?.success) {
-        setCourts(response.data);
+        setFavoriteCourts(response.data);
       } else {
         toast.error(response.message, { style: errorStyle });
       }
@@ -34,13 +34,13 @@ export const FavoriteList = () => {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 md:gap-3 lg:gap-7 md:px-3 w-full mt-5">
       {loading ? (
-        <Loading message={"Loading..."} />
-      ) : courts?.length >= 1 ? (
-        courts.map((court) => {
+        <FavoriteSkeleton />
+      ) : favoriteCourts?.length >= 1 ? (
+        favoriteCourts.map((court) => {
           return <FavoriteItem {...court} key={court._id} />;
         })
       ) : (
-        "You have no favorite court"
+        "You have no favorite courts"
       )}
     </div>
   );

@@ -9,6 +9,7 @@ import {
   Heart,
   Users,
   List,
+  LayoutDashboard,
 } from "lucide-react";
 import {
   SidebarContent,
@@ -37,6 +38,24 @@ export const ContentSidebar = ({ data }) => {
           </Link>
         </SidebarMenuItem>
       </SidebarGroup>
+
+      {data?.user.role == "user" && (
+        <SidebarGroup>
+          <SidebarMenuItem>
+            <Link href="/dashboard">
+              <SidebarMenuButton
+                className={`gap-5 text-md lg:text-lg ${
+                  activePath == "/dashboard"
+                    ? "dark:bg-accent bg-main-theme/70 text-white"
+                    : ""
+                }`}
+              >
+                <LayoutDashboard /> Dashboard
+              </SidebarMenuButton>
+            </Link>
+          </SidebarMenuItem>
+        </SidebarGroup>
+      )}
 
       <SidebarGroup>
         <SidebarMenuItem>

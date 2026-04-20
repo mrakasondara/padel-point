@@ -35,9 +35,11 @@ class PadelApi {
       console.error(error);
     }
   }
-  static async getFavoriteCourts() {
+  static async getFavoriteCourts(limit) {
     try {
-      const response = await fetch(`${baseAPI}/courts/favorites`);
+      const response = await fetch(
+        `${baseAPI}/courts/favorites${limit ? `?limit=${limit}` : ""}`
+      );
       const data = response.json();
       return data;
     } catch (error) {
