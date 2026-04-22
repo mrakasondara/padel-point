@@ -58,6 +58,17 @@ export async function GET(req, { params }) {
       createdAt: "desc",
     });
 
+    if (!comments) {
+      return NextResponse.json(
+        {
+          success: true,
+          message: "Court have no comments",
+          data: [],
+        },
+        { status: 200 }
+      );
+    }
+
     const sortedComment = comments.sort(
       (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
     );
