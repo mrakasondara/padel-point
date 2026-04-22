@@ -174,6 +174,17 @@ class PadelApi {
       console.error(error);
     }
   }
+  static async getBookedCourts(limit) {
+    try {
+      const response = await fetch(
+        `${baseAPI}/courts/booked${limit ? `?limit=${limit}` : ""}`
+      );
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }
 
 export default PadelApi;
