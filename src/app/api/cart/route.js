@@ -63,7 +63,7 @@ export async function POST(req) {
   await Transaction.create(transactionData);
 
   return NextResponse.json(
-    { success: true, message: "Successfully added to Cart" },
+    { success: true, message: "Checkout success" },
     { status: 201 }
   );
 }

@@ -94,6 +94,7 @@ export const Cart = () => {
         toast.success(response.message, {
           style: successStyle,
         });
+        resetCart();
       }
     } catch (error) {
       toast.error(error.message, {

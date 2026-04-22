@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { model, Schema, models } from "mongoose";
 
 const timesSchema = new Schema({
@@ -8,8 +9,8 @@ const bookedDatesSchema = new Schema({
   times: [timesSchema],
 });
 const courtSchema = new Schema({
-  _id: {
-    type: Schema.ObjectId,
+  court_id: {
+    type: ObjectId,
     required: {
       value: true,
       message: "Court id shouldn't empty",
@@ -22,7 +23,7 @@ const courtSchema = new Schema({
 const transactionSchema = new Schema(
   {
     user_id: {
-      type: Schema.ObjectId,
+      type: ObjectId,
       required: {
         value: true,
         message: "User id shouldn't empty",
