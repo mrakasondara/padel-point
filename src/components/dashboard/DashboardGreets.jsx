@@ -2,6 +2,7 @@
 import { useSession } from "next-auth/react";
 import { Button } from "../ui/button";
 import { TicketCheck } from "lucide-react";
+import Link from "next/link";
 
 export const DashboardGreets = () => {
   const { data } = useSession();
@@ -15,13 +16,15 @@ export const DashboardGreets = () => {
           Today is {new Date().toDateString()}
         </p>
       </div>
-      <Button
-        variant="outline"
-        className="bg-main-theme hover:bg-secondary-theme hover:text-main-theme cursor-pointer transition text-constant font-poppins "
-      >
-        <TicketCheck />
-        Book court
-      </Button>
+      <Link href={"/court"}>
+        <Button
+          variant="outline"
+          className="bg-main-theme hover:bg-secondary-theme hover:text-main-theme cursor-pointer transition text-constant font-poppins "
+        >
+          <TicketCheck />
+          Book court
+        </Button>
+      </Link>
     </div>
   );
 };
