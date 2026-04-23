@@ -17,7 +17,7 @@ export async function GET(req) {
 
   try {
     await connectDB(mongoURI);
-    const transactions = await Transaction.find(
+    let transactions = await Transaction.find(
       {
         user_id,
         payment_status: "paid",
@@ -57,10 +57,10 @@ export async function GET(req) {
       court.court_name = court_name;
     }
 
-    const data = { courts: mergedCourts.splice(0, limit), payment: "paid" };
+    const data = limit ? mergedCourts.splice(0, limit) : mergedCourts;
 
     return NextResponse.json(
-      { success: true, data, message: "Transactions fetched successfully" },
+      { success: true, data, message: "Booked courts fetched successfully" },
       { status: 200 }
     );
   } catch (error) {

@@ -58,6 +58,17 @@ class PadelApi {
       console.error(error);
     }
   }
+  static async getBookedCourts(limit) {
+    try {
+      const response = await fetch(
+        `${baseAPI}/courts/booked${limit ? `?limit=${limit}` : ""}`
+      );
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   // comment court api
   static async getComments(id) {
@@ -168,17 +179,6 @@ class PadelApi {
         method: "DELETE",
         body: JSON.stringify(court),
       });
-      const data = response.json();
-      return data;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  static async getBookedCourts(limit) {
-    try {
-      const response = await fetch(
-        `${baseAPI}/courts/booked${limit ? `?limit=${limit}` : ""}`
-      );
       const data = response.json();
       return data;
     } catch (error) {

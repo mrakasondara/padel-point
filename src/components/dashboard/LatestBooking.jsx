@@ -18,7 +18,7 @@ export const DashboardLatestBooking = () => {
       setLoading(true);
       const response = await PadelApi.getBookedCourts(3);
       if (response?.success) {
-        setBookedCourts(response.data.courts);
+        setBookedCourts(response.data);
       } else {
         toast.error(response.message, { style: errorStyle });
       }
