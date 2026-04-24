@@ -58,7 +58,7 @@ const transactionSchema = new Schema(
         value: true,
         message: "Payment status shouldn't empty",
       },
-      enum: ["pending", "confirmed", "cancelled", "completed"],
+      enum: ["pending", "cancelled", "completed"],
       default: "pending",
     },
   },
