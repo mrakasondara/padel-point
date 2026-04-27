@@ -78,15 +78,17 @@ export const ContentSidebar = ({ data }) => {
           </Link>
         </SidebarMenuItem>
         <SidebarMenuItem>
-          <SidebarMenuButton
-            className={`gap-5 text-md lg:text-lg ${
-              activePath == "/court/search"
-                ? "dark:bg-accent bg-main-theme/70 text-white"
-                : ""
-            }`}
-          >
-            <Search /> Search
-          </SidebarMenuButton>
+          <Link href="/court/search">
+            <SidebarMenuButton
+              className={`gap-5 text-md lg:text-lg ${
+                activePath == "/court/search"
+                  ? "dark:bg-accent bg-main-theme/70 text-white"
+                  : ""
+              }`}
+            >
+              <Search /> Search
+            </SidebarMenuButton>
+          </Link>
         </SidebarMenuItem>
         {data?.user.role == "user" && (
           <SidebarMenuItem>

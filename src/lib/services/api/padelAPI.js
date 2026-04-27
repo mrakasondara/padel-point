@@ -1,4 +1,20 @@
 const baseAPI = process.env.NEXT_PUBLIC_BASE_API;
+
+export const buildQuery = (params = {}) => {
+  const query = new URLSearchParams();
+  Object.entries(params).forEach(([key, value]) => {
+    if (
+      value !== undefined &&
+      value !== null &&
+      value !== "" &&
+      value !== "all"
+    ) {
+      query.append(key, value);
+    }
+  });
+  return query.toString();
+};
+
 class PadelApi {
   // auth api
   static async register(userData) {
@@ -63,6 +79,18 @@ class PadelApi {
       const response = await fetch(
         `${baseAPI}/courts/booked${limit ? `?limit=${limit}` : ""}`
       );
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  static async searchCourts(query) {
+    const url = `${baseAPI}/courts/search${query ? `?${query}` : ""}`;
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+      });
       const data = response.json();
       return data;
     } catch (error) {

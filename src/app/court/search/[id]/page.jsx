@@ -1,17 +1,13 @@
-import { CourtDetail } from "@/components/courts/court-detail/CourtDetail";
 import { getCourtTitle } from "@/database";
-import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
   const title = await getCourtTitle(id);
-  if (!title) {
-    return notFound();
-  }
+
   return { title };
 }
 
 export default async function Page({ params }) {
   const { id } = await params;
-  return <CourtDetail id={id} />;
+  return <h1>{id}</h1>;
 }

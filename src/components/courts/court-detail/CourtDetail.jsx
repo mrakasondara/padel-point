@@ -24,10 +24,10 @@ export const CourtDetail = ({ id }) => {
       if (response?.success) {
         setCourt(response.data);
       } else {
-        toast.error(response.message, { style: errorStyle });
+        console.error(response.message);
       }
     } catch (error) {
-      toast.error(error.message, { style: errorStyle });
+      console.error(error.message);
     } finally {
       setIsLoading(false);
     }
@@ -40,10 +40,10 @@ export const CourtDetail = ({ id }) => {
       if (response?.success) {
         setComments(response.data);
       } else {
-        toast.error(response.message, { style: errorStyle });
+        console.error(response.message);
       }
     } catch (error) {
-      toast.error(error.message, { style: errorStyle });
+      console.error(error.message, { style: errorStyle });
     } finally {
       setCommentLoading(false);
     }

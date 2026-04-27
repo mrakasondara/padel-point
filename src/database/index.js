@@ -26,6 +26,7 @@ export const getCourtTitle = async (id) => {
   try {
     await connectDB(mongoURI);
     const court = await Court.findOne({ _id: id }, "court_name");
+    if (!court) return new Error("Something Error");
     return court.court_name;
   } catch (error) {
     console.error(`Error : ${error}`);
