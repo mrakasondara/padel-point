@@ -43,7 +43,7 @@ export const SearchCourtsGrid = () => {
         </h4>
       )}
       <div
-        className={`grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5 py-5 w-full ${
+        className={`grid grid-cols-2 lg:grid-cols-5 gap-5 py-5 w-full ${
           isLoading ? "justify-center items-center" : ""
         }`}
       >

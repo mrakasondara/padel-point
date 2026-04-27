@@ -6,6 +6,7 @@ import { FacilitiesFilter } from "./FacilitiesFilter";
 import { BudgetFilter } from "./BudgetFilter";
 import { buildQuery } from "@/lib/services/api/padelAPI";
 import { useRouter } from "next/navigation";
+import { Filter } from "lucide-react";
 
 export const SearchFilter = () => {
   const router = useRouter();
@@ -53,9 +54,9 @@ export const SearchFilter = () => {
         />
         <Button
           type="submit"
-          className="w-full md:w-3/4 lg:w-1/2 bg-main-theme text-secondary hover:text-main-theme hover:bg-transparent hover:shadow cursor-pointer hover:shadow shadow-main-theme transition-all"
+          className="w-full bg-main-theme hover:bg-secondary-theme hover:text-main-theme cursor-pointer transition text-constant"
         >
-          Filter
+          <Filter /> Filter
         </Button>
       </form>
     </div>
