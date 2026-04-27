@@ -92,15 +92,17 @@ export const ContentSidebar = ({ data }) => {
         </SidebarMenuItem>
         {data?.user.role == "user" && (
           <SidebarMenuItem>
-            <SidebarMenuButton
-              className={`gap-5 text-md lg:text-lg ${
-                activePath == "/dashboard/booked"
-                  ? "dark:bg-accent bg-main-theme/70 text-white"
-                  : ""
-              }`}
-            >
-              <CalendarCheck2 /> Booked
-            </SidebarMenuButton>
+            <Link href="/dashboard/booked">
+              <SidebarMenuButton
+                className={`gap-5 text-md lg:text-lg ${
+                  activePath == "/dashboard/booked"
+                    ? "dark:bg-accent bg-main-theme/70 text-white"
+                    : ""
+                }`}
+              >
+                <CalendarCheck2 /> Booked
+              </SidebarMenuButton>
+            </Link>
           </SidebarMenuItem>
         )}
         {data?.user.role == "admin" ||
