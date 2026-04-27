@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Loading } from "@/components/layout/Loading";
+import { toast } from "sonner";
 import { CourtItem } from "./CourtItem";
 import PadelApi from "@/lib/services/api/padelAPI";
-import { toast } from "sonner";
+import { CourtsSkeleton } from "../CourtsSkeleton";
 
 export const CourtsGrid = () => {
   const [courts, setCourts] = useState([]);
@@ -36,7 +36,7 @@ export const CourtsGrid = () => {
       }`}
     >
       {isLoading ? (
-        <Loading message={"Loading"} />
+        <CourtsSkeleton />
       ) : (
         courts.map((court) => {
           return <CourtItem {...court} key={court._id} />;

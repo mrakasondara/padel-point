@@ -5,7 +5,7 @@ import { toast } from "sonner";
 
 import { FavoriteItem } from "./FavoriteItem";
 import { errorStyle } from "@/lib/toster-styles";
-import { FavoriteSkeleton } from "./FavoriteSkeleton";
+import { CourtsSkeleton } from "../courts/CourtsSkeleton";
 
 export const FavoriteList = () => {
   const [loading, setLoading] = useState(false);
@@ -34,7 +34,7 @@ export const FavoriteList = () => {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 md:gap-3 lg:gap-7 md:px-3 w-full mt-5">
       {loading ? (
-        <FavoriteSkeleton />
+        <CourtsSkeleton />
       ) : favoriteCourts?.length >= 1 ? (
         favoriteCourts.map((court) => {
           return <FavoriteItem {...court} key={court._id} />;

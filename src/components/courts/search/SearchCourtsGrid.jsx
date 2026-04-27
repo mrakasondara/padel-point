@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { Loading } from "@/components/layout/Loading";
 import { SearchCourtItem } from "./SearchCourtItem";
 import PadelApi from "@/lib/services/api/padelAPI";
+import { CourtsSkeleton } from "../CourtsSkeleton";
 
 export const SearchCourtsGrid = () => {
   const searchParams = useSearchParams();
@@ -48,7 +48,7 @@ export const SearchCourtsGrid = () => {
         }`}
       >
         {isLoading ? (
-          <Loading message={"Loading"} />
+          <CourtsSkeleton />
         ) : (
           courts.map((court) => {
             return <SearchCourtItem {...court} key={court._id} />;

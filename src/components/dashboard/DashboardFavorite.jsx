@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { FavoriteItem } from "../favorites/FavoriteItem";
-import { FavoriteSkeleton } from "../favorites/FavoriteSkeleton";
-import PadelApi from "@/lib/services/api/padelAPI";
 import { toast } from "sonner";
+import { FavoriteItem } from "../favorites/FavoriteItem";
+import PadelApi from "@/lib/services/api/padelAPI";
 import { errorStyle } from "@/lib/toster-styles";
+import { CourtsSkeleton } from "../courts/CourtsSkeleton";
 
 export const DashboardFavoriteCourts = () => {
   const [favoriteCourts, setFavoriteCourts] = useState({});
@@ -44,7 +44,7 @@ export const DashboardFavoriteCourts = () => {
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-5 md:gap-3 lg:gap-7 md:px-3 w-full pt-5">
         {loading ? (
-          <FavoriteSkeleton />
+          <CourtsSkeleton length={3} />
         ) : favoriteCourts?.length >= 1 ? (
           favoriteCourts.map((court, index) => (
             <FavoriteItem {...court} key={index} />
