@@ -3,6 +3,11 @@ import { RedirectType, redirect } from "next/navigation";
 import { AppSidebar } from "@/components/layout/sidebar/AppSidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { authOptions } from "../api/auth/[...nextauth]/route";
+import { Geist } from "next/font/google";
+
+const geist = Geist({
+  subsets: ["latin"],
+});
 
 export default async function Layout({ children }) {
   const user = await getServerSession(authOptions);
@@ -13,7 +18,7 @@ export default async function Layout({ children }) {
   return (
     <SidebarProvider defaultOpen={false}>
       <AppSidebar />
-      <main className="flex flex-col w-full relative mt-3">
+      <main className={`flex flex-col w-full relative mt-3 ${geist.className}`}>
         <SidebarTrigger className="absolute -mx-2 text-lg shadow shadow-main-theme -mt-3  cursor-pointer text-main-theme" />
         {children}
       </main>
