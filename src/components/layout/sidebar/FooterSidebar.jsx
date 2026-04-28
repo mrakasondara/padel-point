@@ -21,7 +21,10 @@ export const FooterSidebar = ({ data }) => {
         <DropdownMenuTrigger asChild>
           <SidebarMenuButton className="py-7">
             <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+              <AvatarImage
+                src={data?.user.imageThumb ?? "/images/profile/default.jpg"}
+                alt="profile-pict"
+              />
               <AvatarBadge className="bg-green-600 dark:bg-green-800" />
             </Avatar>
             <div className="flex flex-col text-main-theme font-poppins">

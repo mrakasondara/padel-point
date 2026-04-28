@@ -88,7 +88,7 @@ export const Reviews = () => {
         </h4>
         <div className="lg:self-start flex mt-3">
           <img
-            src="images/profile.jpg"
+            src="images/profile/profile.jpg"
             alt="profile"
             className="w-[45px] rounded-full"
           />
