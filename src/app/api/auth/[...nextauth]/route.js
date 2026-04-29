@@ -6,6 +6,7 @@ import NextAuth from "next-auth/next";
 import CredentialsProviders from "next-auth/providers/credentials";
 
 import { mongoURI } from "../../../../../constant";
+import { getUserImageProfile } from "@/supabase/storage/client";
 
 export const authOptions = {
   providers: [
@@ -40,6 +41,19 @@ export const authOptions = {
         const userData = await User.findOne({ email: user.email });
         token.email = user.email;
         token.fullName = userData.full_name ?? "";
+
+        if (userData.image_thumb) {
+          const { data, error } = await getUserImageProfile(
+            userData.image_thumb
+          );
+          if (data) {
+            token.imageThumb = data.publicUrl;
+          } else {
+            token.imageThumb = null;
+          }
+        } else {
+          token.imageThumb = null;
+        }
       }
 
       if (!token.role && token.email) {
@@ -54,6 +68,7 @@ export const authOptions = {
         session.user.email = token.email;
         session.user.role = token.role;
         session.user.fullName = token.fullName;
+        session.user.imageThumb = token.imageThumb;
       }
       return session;
     },
