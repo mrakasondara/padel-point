@@ -30,6 +30,20 @@ class PadelApi {
     }
   }
 
+  // user api
+  static async updateImageProfile(formData) {
+    try {
+      const response = await fetch(`${baseAPI}/profile/image-profile`, {
+        method: "PUT",
+        body: formData,
+      });
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   // courts api
   static async getCourts(limit) {
     try {

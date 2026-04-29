@@ -20,11 +20,15 @@ export const ImageProfile = ({ user }) => {
       onMouseLeave={onMouseLeave}
     >
       <AvatarImage
-        src="/images/profile/profile.jpg"
+        src={user?.imageThumb ?? "/images/profile/profile.jpg"}
         className={isHovering ? "blur-sm" : "blur-none"}
         alt="@shadcn"
       />
-      <ImageDialog isHovering={isHovering} onClick={onClick} />
+      <ImageDialog
+        oldImage={user?.imageThumb}
+        isHovering={isHovering}
+        onClick={onClick}
+      />
     </Avatar>
   );
 };
