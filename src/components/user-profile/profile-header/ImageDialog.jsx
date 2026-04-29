@@ -88,7 +88,7 @@ export const ImageDialog = ({ oldImage, isHovering, onClick }) => {
           <FieldGroup className="flex flex-col items-center gap-3">
             <Avatar className={"w-40 h-auto"}>
               <AvatarImage
-                src={imagePrev ? imagePrev : "/images/profile/profile.jpg"}
+                src={imagePrev ? imagePrev : "/images/profile/guest.webp"}
                 alt="profile"
               />
             </Avatar>
@@ -102,6 +102,7 @@ export const ImageDialog = ({ oldImage, isHovering, onClick }) => {
                 className="text-sm"
                 accept="image/*"
                 onChange={(e) => onSelectFile(e)}
+                required
               />
               <span className="text-[11px] text-yellow-600 -mt-2">
                 Image profile will be updated after logout

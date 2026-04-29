@@ -20,7 +20,7 @@ export const ImageProfile = ({ user }) => {
       onMouseLeave={onMouseLeave}
     >
       <AvatarImage
-        src={user?.imageThumb ?? "/images/profile/profile.jpg"}
+        src={user?.imageThumb ?? "/images/profile/guest.webp"}
         className={isHovering ? "blur-sm" : "blur-none"}
         alt="@shadcn"
       />
