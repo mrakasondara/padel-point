@@ -22,7 +22,7 @@ export const FooterSidebar = ({ data }) => {
           <SidebarMenuButton className="py-7">
             <Avatar>
               <AvatarImage
-                src={data?.user.imageThumbs ?? "/images/profile/guest.webp"}
+                src={data?.user.imageThumb ?? "/images/profile/guest.webp"}
                 alt="profile-pict"
               />
               <AvatarBadge className="bg-green-600 dark:bg-green-800" />

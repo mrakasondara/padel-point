@@ -43,6 +43,27 @@ class PadelApi {
       console.error(error);
     }
   }
+  static async getPersonalInformation() {
+    try {
+      const response = await fetch(`${baseAPI}/profile/personal-information`);
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  static async updatePersonalInformation(data) {
+    try {
+      const response = await fetch(`${baseAPI}/profile/personal-information`, {
+        method: "PUT",
+        body: data,
+      });
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   // courts api
   static async getCourts(limit) {
