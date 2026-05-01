@@ -1,5 +1,7 @@
 "use client";
+
 import { useEffect, useState } from "react";
+import { formatPhoneNumberIntl } from "react-phone-number-input";
 import Link from "next/link";
 import {
   Table,
@@ -30,7 +32,6 @@ export const PersonalInformation = () => {
       const response = await PadelApi.getPersonalInformation();
       if (response?.success) {
         setUserData(response.data);
-        console.log(userData);
       } else {
         console.error(response.message);
       }
@@ -109,7 +110,7 @@ export const PersonalInformation = () => {
                 {loading ? (
                   <Skeleton className="w-40 rounded-xs h-2" />
                 ) : (
-                  userData?.phone ?? "-"
+                  formatPhoneNumberIntl(userData?.phone) ?? "-"
                 )}
               </TableCell>
             </TableRow>

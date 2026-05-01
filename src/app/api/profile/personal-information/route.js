@@ -31,3 +31,28 @@ export async function GET(req) {
     );
   }
 }
+
+export async function PUT(req) {
+  const isAuth = await authCheck(req);
+  if (!isAuth.email) return isAuth;
+
+  const user_id = isAuth.sub;
+
+  try {
+    const userData = await req.json();
+    await connectDB(mongoURI);
+    const user = await User.updateOne({ _id: user_id }, { ...userData });
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Users personal information successfully updated",
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    return NextResponse.json(
+      { success: false, message: error.message },
+      { status: 400 }
+    );
+  }
+}

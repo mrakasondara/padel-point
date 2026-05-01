@@ -52,11 +52,11 @@ class PadelApi {
       console.error(error);
     }
   }
-  static async updatePersonalInformation(data) {
+  static async updatePersonalInformation(formData) {
     try {
       const response = await fetch(`${baseAPI}/profile/personal-information`, {
         method: "PUT",
-        body: data,
+        body: JSON.stringify(formData),
       });
       const data = response.json();
       return data;
