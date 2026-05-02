@@ -64,6 +64,18 @@ class PadelApi {
       console.error(error);
     }
   }
+  static async changePassword(formData) {
+    try {
+      const response = await fetch(`${baseAPI}/profile/change-password`, {
+        method: "PUT",
+        body: JSON.stringify(formData),
+      });
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   // courts api
   static async getCourts(limit) {
