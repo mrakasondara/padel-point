@@ -166,7 +166,7 @@ export const FormUpdate = () => {
           </div>
 
           <Button
-            className="ml-auto w-full md:w-1/4 bg-main-theme text-secondary hover:text-main-theme hover:bg-transparent cursor-pointer transition-all"
+            className="ml-auto w-full md:w-1/4 bg-main-theme text-secondary dark:text-white hover:text-main-theme hover:bg-transparent cursor-pointer transition-all"
             variant="outline"
           >
             {loading ? <Spinner /> : ""}

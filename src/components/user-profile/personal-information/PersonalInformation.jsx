@@ -96,7 +96,7 @@ export const PersonalInformation = () => {
             </TableRow>
             <TableRow>
               <TableCell className="w-37.5">Gender:</TableCell>
-              <TableCell className="font-medium">
+              <TableCell className="font-medium capitalize">
                 {loading ? (
                   <Skeleton className="w-40 rounded-xs h-2" />
                 ) : (

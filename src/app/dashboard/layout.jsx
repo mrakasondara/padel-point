@@ -1,6 +1,7 @@
 import { getServerSession } from "next-auth";
 import { RedirectType, redirect } from "next/navigation";
 import { AppSidebar } from "@/components/layout/sidebar/AppSidebar";
+import { BreadcrumbNav } from "@/components/layout/BreadcrumbNav";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { Geist } from "next/font/google";
@@ -20,6 +21,7 @@ export default async function Layout({ children }) {
       <AppSidebar />
       <main className={`flex flex-col w-full relative mt-3 ${geist.className}`}>
         <SidebarTrigger className="absolute -mx-2 text-lg shadow shadow-main-theme -mt-3  cursor-pointer text-main-theme" />
+        <BreadcrumbNav />
         {children}
       </main>
     </SidebarProvider>
