@@ -111,7 +111,8 @@ export const ImageDialog = ({ oldImage, isHovering, onClick }) => {
           </FieldGroup>
           <Button
             type="submit"
-            className="ml-auto bg-main-theme hover:bg-secondary-theme hover:text-main-theme cursor-pointer transition text-constant"
+            variant="outline"
+            className="ml-auto bg-main-theme text-secondary dark:text-white hover:text-main-theme hover:bg-transparent cursor-pointer transition-all"
           >
             {loading && <Spinner />}
             Save changes
