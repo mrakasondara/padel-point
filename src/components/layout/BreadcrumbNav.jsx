@@ -22,19 +22,21 @@ export const BreadcrumbNav = () => {
               ? "/dashboard"
               : `/${splitPath.slice(0, index + 1).join("/")}`;
           const title = item.includes("-") ? item.split("-").join(" ") : item;
-          console.log(title);
-          const titleCase = title[0].toUpperCase() + title.slice(1);
           {
             return splitPath.length - 1 === index ? (
               <div key={index}>
                 <BreadcrumbItem>
-                  <BreadcrumbPage href={href}>{titleCase}</BreadcrumbPage>
+                  <BreadcrumbPage href={href} className="capitalize">
+                    {title}
+                  </BreadcrumbPage>
                 </BreadcrumbItem>
               </div>
             ) : (
               <div key={index} className="flex items-center gap-2">
                 <BreadcrumbItem>
-                  <BreadcrumbLink href={href}>{titleCase}</BreadcrumbLink>
+                  <BreadcrumbLink href={href} className="capitalize">
+                    {title}
+                  </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
               </div>
