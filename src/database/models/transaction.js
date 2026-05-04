@@ -16,6 +16,7 @@ const courtSchema = new Schema({
       message: "Court id shouldn't empty",
     },
   },
+  court_name: { type: String },
   booked_dates: [bookedDatesSchema],
   total_payment: Number,
 });
