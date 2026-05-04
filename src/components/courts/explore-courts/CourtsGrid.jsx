@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { CourtItem } from "./CourtItem";
 import PadelApi from "@/lib/services/api/padelAPI";
 import { CourtsSkeleton } from "../CourtsSkeleton";
+import { errorStyle } from "@/lib/toster-styles";
 
 export const CourtsGrid = () => {
   const [courts, setCourts] = useState([]);

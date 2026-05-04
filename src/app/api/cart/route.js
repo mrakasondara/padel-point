@@ -1,3 +1,4 @@
+import midtransClient from "midtrans-client";
 import { connectDB } from "@/database";
 import { authCheck } from "@/lib/auth";
 import { NextResponse } from "next/server";
@@ -15,10 +16,11 @@ export async function POST(req) {
 
   const newCourts = Object.values(
     courts.reduce((acc, item) => {
-      const { id, selectedDate, selectedTime, price } = item;
+      const { id, court_name, selectedDate, selectedTime, price } = item;
 
       if (!acc[id]) {
         acc[id] = {
+          court_name,
           court_id: id,
           booked_dates: [],
           total_payment: price,
@@ -56,16 +58,65 @@ export async function POST(req) {
     user_id,
     courts: newCourts,
     total_payment: totalPayment,
-    payment_status: "paid",
+    payment_status: "pending",
     transaction_status: "pending",
   };
 
-  await Transaction.create(transactionData);
+  try {
+    await connectDB(mongoURI);
 
-  return NextResponse.json(
-    { success: true, message: "Checkout success" },
-    { status: 201 }
-  );
+    // const transaction = await Transaction.create(transactionData);
+    // const transaction_id = transaction._id;
+    // console.log(String(transaction_id));
+
+    const snap = new midtransClient.Snap({
+      isProduction: false,
+      serverKey: process.env.MIDTRANS_SERVER_KEY,
+    });
+
+    const itemDetails = newCourts.map((court) => {
+      return {
+        name: `${court.court_name} (${court.booked_dates.length} booked dates)`,
+        id: court.court_id,
+        quantity: court.booked_dates.length,
+        price: court.total_payment / court.booked_dates.length,
+        amount: court.total_payment,
+      };
+    });
+
+    const params = {
+      transaction_details: {
+        order_id: "13920492304",
+        gross_amount: totalPayment,
+      },
+      credit_card: {
+        secure: true,
+      },
+      item_details: itemDetails,
+      customer_details: {
+        email: isAuth.email,
+      },
+    };
+
+    const payment = await snap.createTransaction(params);
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Please continue the payment process",
+        data: payment,
+      },
+      { status: 201 }
+    );
+  } catch (error) {
+    return NextResponse.json(
+      {
+        success: false,
+        message: error.message,
+      },
+      { status: 400 }
+    );
+  }
 }
 
 export async function PUT(req) {

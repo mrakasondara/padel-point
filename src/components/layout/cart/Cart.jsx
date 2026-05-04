@@ -25,6 +25,7 @@ export const Cart = () => {
   const [checkOutLoading, setCheckOutLoading] = useState(false);
   const [resetLoading, setResetLoading] = useState(false);
   const [removeLoading, setRemoveLoading] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const mergedCart = cart.reduce((acc, item) => {
     const existCourt = acc.find((court) => court.id == item.id);
@@ -90,29 +91,34 @@ export const Cart = () => {
     try {
       setCheckOutLoading(true);
       const response = await PadelApi.checkOutCart(cart);
+      console.log(response);
       if (response?.success) {
-        toast.success(response.message, {
-          style: successStyle,
+        setOpen(false);
+        window.snap.pay(response.data.token);
+        // toast.success(response.message, {
+        //   style: successStyle,
+        // });
+        // resetCart();
+      } else {
+        toast.error(response.message, {
+          style: errorStyle,
         });
-        resetCart();
       }
     } catch (error) {
-      toast.error(error.message, {
-        style: errorStyle,
-      });
     } finally {
       setCheckOutLoading(false);
     }
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <form>
         <DialogTrigger asChild>
           <Button
             variant="transparent"
             className="relative hover:text-main-theme/90 cursor-pointer"
             size="sm"
+            onClick={(e) => setOpen(true)}
           >
             <ShoppingCart />
             <span

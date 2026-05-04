@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
@@ -9,6 +10,24 @@ import { Cart } from "./cart/Cart";
 export const Header = () => {
   const activePath = usePathname();
   const { data } = useSession();
+
+  useEffect(() => {
+    const script = "https://app.sandbox.midtrans.com/snap/snap.js";
+    const clientKey = process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY;
+
+    const scriptElement = document.createElement("script");
+    scriptElement.src = script;
+    scriptElement.setAttribute("data-client-key", clientKey);
+    scriptElement.type = "text/javascript";
+    scriptElement.async = true;
+
+    document.body.appendChild(scriptElement);
+
+    return () => {
+      document.body.removeChild(scriptElement);
+    };
+  }, []);
+
   return (
     <header
       className={`${

@@ -18,6 +18,7 @@
     "date-fns": "^4.1.0",
     "javascript-time-ago": "^2.6.4",
     "lucide-react": "^0.563.0",
+    "midtrans-client": "^1.4.3",
     "mongodb": "^7.1.0",
     "mongoose": "^9.2.1",
     "motion": "^12.34.0",
