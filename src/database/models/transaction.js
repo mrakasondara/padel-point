@@ -38,15 +38,6 @@ const transactionSchema = new Schema(
         message: "Total payment shouldn't empty",
       },
     },
-    payment_status: {
-      type: String,
-      required: {
-        value: true,
-        message: "Payment status shouldn't empty",
-      },
-      enum: ["pending", "paid", "failed", "expired"],
-      default: "pending",
-    },
     invoice_number: {
       type: String,
     },
@@ -57,10 +48,22 @@ const transactionSchema = new Schema(
       type: String,
       required: {
         value: true,
-        message: "Payment status shouldn't empty",
+        message: "Transaction status shouldn't empty",
       },
-      enum: ["pending", "cancelled", "completed"],
+      enum: ["pending", "paid", "failed", "expired"],
       default: "pending",
+    },
+    transaction_midtrans_id: {
+      type: String,
+    },
+    transaction_time: {
+      type: String,
+    },
+    merchant_id: {
+      type: String,
+    },
+    payment_type: {
+      type: String,
     },
   },
   { timestamps: true }
