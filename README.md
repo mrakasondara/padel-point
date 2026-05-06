@@ -33,6 +33,7 @@ Lainnya :
 <ul>
 <li> JWT Authentication </li>
 <li> Supabase Storage </li>
+<li> Midtrans </li>
 </ul>
 
 ## 👨‍💻 Author
