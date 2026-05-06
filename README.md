@@ -7,6 +7,7 @@ PadelPoint adalah aplikasi booking lapangan padel berbasis web yang memungkinkan
 <ul>
   <li>🔍 Melihat daftar lapangan padel</li>
   <li>📅 Booking lapangan berdasarkan tanggal & waktu</li>
+  <li>💳 Integrasi pembayaran dengan Midtrans</li>
   <li>❤️ Like & komentar pada lapangan</li>
   <li>🧾 Riwayat transaksi pengguna</li>
   <li>🔐 Autentikasi (Login & Register)</li>
