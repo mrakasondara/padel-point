@@ -91,20 +91,19 @@ export const Cart = () => {
     try {
       setCheckOutLoading(true);
       const response = await PadelApi.checkOutCart(cart);
-      console.log(response);
       if (response?.success) {
         setOpen(false);
-        window.snap.pay(response.data.token);
-        // toast.success(response.message, {
-        //   style: successStyle,
-        // });
-        // resetCart();
+        snap.pay(response.data);
+        resetCart();
       } else {
         toast.error(response.message, {
           style: errorStyle,
         });
       }
     } catch (error) {
+      toast.error(error.message, {
+        style: errorStyle,
+      });
     } finally {
       setCheckOutLoading(false);
     }

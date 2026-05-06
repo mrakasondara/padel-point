@@ -58,16 +58,14 @@ export async function POST(req) {
     user_id,
     courts: newCourts,
     total_payment: totalPayment,
-    payment_status: "pending",
     transaction_status: "pending",
   };
 
   try {
     await connectDB(mongoURI);
 
-    // const transaction = await Transaction.create(transactionData);
-    // const transaction_id = transaction._id;
-    // console.log(String(transaction_id));
+    const transaction = await Transaction.create(transactionData);
+    const transaction_id = transaction._id;
 
     const snap = new midtransClient.Snap({
       isProduction: false,
@@ -86,7 +84,7 @@ export async function POST(req) {
 
     const params = {
       transaction_details: {
-        order_id: "13920492304",
+        order_id: transaction_id,
         gross_amount: totalPayment,
       },
       credit_card: {
@@ -98,21 +96,23 @@ export async function POST(req) {
       },
     };
 
-    const payment = await snap.createTransaction(params);
+    const { token } = await snap.createTransaction(params);
 
     return NextResponse.json(
       {
         success: true,
         message: "Please continue the payment process",
-        data: payment,
+        data: token,
       },
       { status: 201 }
     );
   } catch (error) {
+    const apiResponse = error.ApiResponse;
+    console.error(apiResponse?.error_messages);
     return NextResponse.json(
       {
         success: false,
-        message: error.message,
+        message: "Something error",
       },
       { status: 400 }
     );
