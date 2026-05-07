@@ -20,9 +20,9 @@ export async function GET(req) {
     let transactions = await Transaction.find(
       {
         user_id,
-        transactions_status: "paid",
+        transaction_status: "paid",
       },
-      "courts transactions_status"
+      "courts transaction_status"
     ).limit(limit);
 
     const courts = transactions.map((transaction) => transaction.courts);
