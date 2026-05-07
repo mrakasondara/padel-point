@@ -54,6 +54,7 @@ export const SearchFilter = () => {
         />
         <Button
           type="submit"
+          variant="outline"
           className="w-full bg-main-theme hover:bg-secondary-theme hover:text-main-theme cursor-pointer transition text-constant"
         >
           <Filter /> Filter
