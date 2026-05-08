@@ -1,20 +1,20 @@
 import { TabsContent } from "../ui/tabs";
-import { TransactionList } from "./TransactionList";
+import { TransactionsList } from "./TransactionsList";
 
 export const TabsBody = () => {
   return (
     <>
       <TabsContent value="overview">
-        <TransactionList title="overview" />
+        <TransactionsList />
       </TabsContent>
-      <TabsContent value="completed">
-        <TransactionList title="Completed" />
+      <TabsContent value="paid">
+        <TransactionsList status="paid" />
       </TabsContent>
       <TabsContent value="pending">
-        <TransactionList title="Pending" />
+        <TransactionsList status="pending" />
       </TabsContent>
-      <TabsContent value="cancelled">
-        <TransactionList title="Cancelled" />
+      <TabsContent value="failed">
+        <TransactionsList status="failed" />
       </TabsContent>
     </>
   );

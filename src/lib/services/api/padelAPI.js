@@ -260,6 +260,20 @@ class PadelApi {
       console.error(error);
     }
   }
+
+  // transactions api
+  static async getTransactions(status) {
+    try {
+      const url = `${baseAPI}/transactions${
+        status ? `?${`transaction_status=${status}`}` : ""
+      }`;
+      const response = await fetch(url);
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }
 
 export default PadelApi;
