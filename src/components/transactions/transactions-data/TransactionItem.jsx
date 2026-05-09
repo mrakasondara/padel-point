@@ -2,8 +2,6 @@
 
 import toRupiah from "@develoka/angka-rupiah-js";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { TransactionCourts } from "./TransactionCourts";
 import { TransactionDialog } from "./TransactionDialog";
 
@@ -45,7 +43,7 @@ export const TransactionItem = ({ transaction }) => {
   };
 
   return (
-    <div className="flex flex-col gap-2 border lg:w-[30%] p-3 rounded-md mb-3">
+    <div className="flex flex-col gap-2 border lg:w-1/2 p-3 rounded-md mb-3">
       <div className="flex justify-between items-center text-[12px]">
         <p>
           {new Intl.DateTimeFormat("en-US", options).format(
@@ -56,9 +54,9 @@ export const TransactionItem = ({ transaction }) => {
         {badgeIcon(transaction?.transaction_status)}
       </div>
 
-      <div className="flex items-center">
+      <div className="flex flex-col md:flex-row md:items-center">
         <TransactionCourts courts={transaction?.courts} />
-        <div className="w-1/4 border-black dark:border-constant h-1/2 border-l-2 flex flex-col justify-center items-center text-sm">
+        <div className="w-full md:w-1/4 mt-1 md:mt-0 md:border-black dark:border-constant h-1/2 md:border-l-2 flex md:flex-col justify-end md:justify-center items-center text-sm">
           <p>Total :</p>
           <p className="font-semibold">
             {toRupiah(transaction?.total_payment ?? 0, {

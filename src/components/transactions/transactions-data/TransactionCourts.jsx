@@ -19,7 +19,7 @@ export const TransactionCourts = ({ courts }) => {
           <h4 className="text-[15px] font-semibold text-main-theme">
             {courts[0]?.court_name}
           </h4>
-          <p className="text-[12px] text-slate-400">
+          <p className="text-[12px] text-muted-foreground">
             {courts[0]?.booked_dates.length} date x{" "}
             {toRupiah(
               courts[0]?.total_payment / courts[0]?.booked_dates.length ?? 0,
@@ -34,9 +34,9 @@ export const TransactionCourts = ({ courts }) => {
       {courts.length >= 2 && (
         <Collapsible className="-mt-1">
           <CollapsibleContent className="mb-1">
-            {courts.slice(0, 1).map((court) => {
+            {courts.slice(0, 1).map((court, index) => {
               return (
-                <div className="flex gap-4 w-3/4">
+                <div className="flex gap-4 w-3/4" key={index}>
                   <img
                     src={court.image_thumb}
                     alt="transaction-image"
@@ -46,7 +46,7 @@ export const TransactionCourts = ({ courts }) => {
                     <h4 className="text-[15px] font-semibold text-main-theme">
                       {court.court_name}
                     </h4>
-                    <p className="text-[12px] text-slate-400">
+                    <p className="text-[12px] text-muted-foreground">
                       {court.booked_dates.length} date x{" "}
                       {toRupiah(
                         court.total_payment / court.booked_dates.length ?? 0,

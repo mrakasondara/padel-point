@@ -7,7 +7,7 @@ import { errorStyle } from "@/lib/toster-styles";
 import { TransactionItem } from "./transactions-data/TransactionItem";
 import { TransactionsSkeleton } from "./transactions-data/TransactionsSkeleton";
 
-export const TransactionsList = ({ status }) => {
+export const TransactionsList = ({ status = "all" }) => {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -37,13 +37,17 @@ export const TransactionsList = ({ status }) => {
         <TransactionsSkeleton />
       ) : (
         <div className="grid grid-cols-1 gap-3">
-          {transactions.length
-            ? transactions.map((transaction, index) => {
-                return (
-                  <TransactionItem transaction={transaction} key={index} />
-                );
-              })
-            : `Transactions with ${status} status no existed`}
+          {transactions.length ? (
+            transactions.map((transaction, index) => {
+              return <TransactionItem transaction={transaction} key={index} />;
+            })
+          ) : (
+            <p>
+              Transaction with{" "}
+              <span className="text-main-theme font-semibold">{status}</span>{" "}
+              status not exist
+            </p>
+          )}
         </div>
       )}
     </div>
