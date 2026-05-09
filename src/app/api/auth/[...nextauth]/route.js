@@ -46,18 +46,14 @@ export const authOptions = {
           const { data, error } = await getUserImageProfile(
             userData.image_thumb
           );
-          if (data) {
-            token.imageThumb = data.publicUrl;
-          } else {
-            token.imageThumb = null;
-          }
+          token.imageThumb = data?.publicUrl ?? null;
         } else {
           token.imageThumb = null;
         }
       }
 
       if (!token.role && token.email) {
-        const isAdmin = await Admin.findOne({ email: user.email });
+        const isAdmin = await Admin.findOne({ email: token.email });
         token.role = isAdmin ? isAdmin.role : "user";
       }
 
