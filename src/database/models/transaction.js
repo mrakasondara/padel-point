@@ -65,6 +65,10 @@ const transactionSchema = new Schema(
     payment_type: {
       type: String,
     },
+    snap_token: {
+      type: String,
+    },
+    bank: { type: String },
   },
   { timestamps: true }
 );

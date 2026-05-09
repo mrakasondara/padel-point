@@ -7,7 +7,7 @@ import { errorStyle } from "@/lib/toster-styles";
 import { TransactionItem } from "./transactions-data/TransactionItem";
 import { TransactionsSkeleton } from "./transactions-data/TransactionsSkeleton";
 
-export const TransactionsList = ({ status = "all" }) => {
+export const TransactionsList = ({ status }) => {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -44,7 +44,9 @@ export const TransactionsList = ({ status = "all" }) => {
           ) : (
             <p>
               Transaction with{" "}
-              <span className="text-main-theme font-semibold">{status}</span>{" "}
+              <span className="text-main-theme font-semibold">
+                {status ?? "any"}
+              </span>{" "}
               status not exist
             </p>
           )}

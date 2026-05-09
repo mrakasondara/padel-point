@@ -64,6 +64,22 @@ export async function POST(req) {
   try {
     await connectDB(mongoURI);
 
+    // check if user still have a pending transaction
+    const transactionPending = await Transaction.find({
+      user_id,
+      transaction_status: "pending",
+    });
+
+    if (transactionPending.length) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Please finish the payment process first",
+        },
+        { status: 400 }
+      );
+    }
+
     const transaction = await Transaction.create(transactionData);
     const transaction_id = transaction._id;
 
@@ -97,6 +113,10 @@ export async function POST(req) {
     };
 
     const { token } = await snap.createTransaction(params);
+
+    console.log(token);
+
+    await Transaction.updateOne({ _id: transaction_id }, { snap_token: token });
 
     return NextResponse.json(
       {

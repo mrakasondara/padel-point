@@ -17,7 +17,19 @@ export async function POST(req) {
     payment_type,
     merchant_id,
     transaction_id,
+    va_numbers,
   } = body;
+
+  const getPaymentMethod = (paymentType) => {
+    if (paymentType === "echannel") {
+      return "Mandiri Bank";
+    } else if (paymentType === "bank_transfer") {
+      const bankName = va_numbers?.[0]?.bank;
+      return bankName ? `${bankName} Bank` : "Bank Transfer";
+    } else {
+      return paymentType;
+    }
+  };
 
   try {
     const hash = crypto
@@ -38,6 +50,7 @@ export async function POST(req) {
 
     switch (transaction_status) {
       case "settlement":
+        const formatPaymentType = getPaymentMethod(payment_type);
         await Transaction.updateOne(
           { _id: order_id },
           {
@@ -45,7 +58,7 @@ export async function POST(req) {
             transaction_midtrans_id: transaction_id,
             transaction_time,
             merchant_id,
-            payment_type,
+            payment_type: formatPaymentType,
           }
         );
         return NextResponse.json(
