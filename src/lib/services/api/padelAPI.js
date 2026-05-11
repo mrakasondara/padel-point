@@ -77,6 +77,17 @@ class PadelApi {
     }
   }
 
+  // transaction api
+  static async getDetailTransaction(id) {
+    try {
+      const response = await fetch(`${baseAPI}/transactions/${id}`);
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   // courts api
   static async getCourts(limit) {
     try {
