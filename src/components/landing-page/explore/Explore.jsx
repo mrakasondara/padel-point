@@ -1,45 +1,50 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import { ExploreItem } from "./ExploreItem";
+import PadelApi from "@/lib/services/api/padelAPI";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const Explore = () => {
-  const exploreItems = [
-    {
-      id: 1,
-      city_name: "Jakarta",
-      total_court: 6,
-      image: "images/jakarta.jpg",
-    },
-    {
-      id: 2,
-      city_name: "Bandung",
-      total_court: 3,
-      image: "images/bandung.avif",
-    },
-    {
-      id: 3,
-      city_name: "Surabaya",
-      total_court: 4,
-      image: "images/surabaya.jpg",
-    },
-    {
-      id: 4,
-      city_name: "Bali",
-      total_court: 9,
-      image: "images/bali.jpg",
-    },
-    {
-      id: 5,
-      city_name: "Maluku",
-      total_court: 1,
-      image: "images/bali.jpg",
-    },
-  ];
+  const [exploreItems, setExploreItems] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const fetchExplore = async () => {
+    setLoading(true);
+    try {
+      const response = await PadelApi.getCourtsByCityStats();
+      if (response?.success) {
+        setExploreItems(response.data);
+      } else {
+        console.error(response.message);
+      }
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchExplore();
+  }, []);
+
   return (
     <div className="flex flex-col gap-3 mt-16" id="explore">
       <h3 className="text-2xl text-main-theme font-itim">Explore City</h3>
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 gap-y-5 px-3 lg:px-[3rem]">
-        {exploreItems.map((explore) => {
-          return <ExploreItem {...explore} key={explore.id} />;
-        })}
+        {loading ? (
+          <>
+            <Skeleton className="w-[70px] md:w-[120px] h-20" />
+            <Skeleton className="w-[70px] md:w-[120px] h-20" />
+            <Skeleton className="w-[70px] md:w-[120px] h-20" />
+            <Skeleton className="w-[70px] md:w-[120px] h-20" />
+          </>
+        ) : (
+          exploreItems.map((explore, index) => {
+            return <ExploreItem {...explore} key={index} />;
+          })
+        )}
       </div>
     </div>
   );

@@ -155,6 +155,15 @@ class PadelApi {
       console.error(error);
     }
   }
+  static async getCourtsByCityStats() {
+    try {
+      const response = await fetch(`${baseAPI}/courts/cities`);
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   // comment court api
   static async getComments(id) {
